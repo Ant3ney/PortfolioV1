@@ -137,9 +137,9 @@ passport.use(new FacebookStrategy(stratOptionsFacebook, (accessToken, refreshTok
 //Google stratigy options
 var stratOptionsGoogle = {
 	//options for strategy
-	callbackURL: process.env.CALLBACKURL,
-	clientID: process.env.CLIENTID,
-	clientSecret: process.env.CLIENTSECRET
+	callbackURL: process.env.GCALLBACKURL,
+	clientID: process.env.GCLIENTID,
+	clientSecret: process.env.GCLIENTSECRET
 }
 
 //Google stategy config

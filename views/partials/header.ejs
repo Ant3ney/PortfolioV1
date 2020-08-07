@@ -1,25 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Authentication</title>
+	<!-- Font awsome -->
+	<script src="https://kit.fontawesome.com/0d4692f1c3.js" crossorigin="anonymous"></script>
+
+	<!-- Google fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
 	  
 	  <!-- Custum css -->
 	  <link rel="stylesheet" type="text/css" href="/css/main01.css">
-  </head>
-  <body>
-	<a href="/">Home</a>	
-	  
-	<!-- Check if a user is logged authenticated -->
-	<% if(!currentUser) { %>
-		<a href="/login">Login</a>
-		<a href="/signup">Sign up</a>
-	<% } else {%>
-		<a href="/logout">Sign out</a>
-	<% } %>
+	
+   <title>Anthony Full Stack</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm container-wide">
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active navele-margin-left snap-right-sm">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item navele-margin-left snap-right-sm">
+              <a class="nav-link" href="#">Resume</a>
+            </li>
+            <li class="nav-item navele-margin-left snap-right-sm">
+              <a class="nav-link" href="#">Projects</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item snap-right-sm">
+                <a class="nav-link" href="#">Login</a>
+              </li>
+              <li class="nav-item navele-margin-right snap-right-sm">
+                <a class="nav-link" href="#">Sign up</a>
+              </li>
+          </ul>
+        </div>
+    </nav>
