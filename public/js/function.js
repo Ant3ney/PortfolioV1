@@ -73,8 +73,10 @@ function toggleForm(makeVisable){
 signUpBtn.addEventListener("click", signUpPressed);
 loginBtn.addEventListener("click", loginPressed);
 exitBtn.addEventListener("click", exitPressed);
-loginNavBtn.addEventListener("click", loginNavPressed);
-signUpNavBtn.addEventListener("click", signUpNavPressed);
+if(loginNavBtn && signUpNavBtn){
+	loginNavBtn.addEventListener("click", loginNavPressed);
+	signUpNavBtn.addEventListener("click", signUpNavPressed);
+}
 
 //Nav scroll to 
 var navSkill = document.getElementById("nav-skills");
