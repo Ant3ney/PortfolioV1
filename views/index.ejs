@@ -1,15 +1,79 @@
 <%- include("partials/header") -%>
 <!-- Display flash message -->
-<% if(message){ %>
-	<h4>
+<% if(message.toString() != "") { %>
+	<div class="flash-message flash-auth">
 		<%= message %>
-	</h4>
+	</div>
 <% } %>
-<% if(err){ %>
-	<h4>
+<% if(err.toString() != ""){ %>
+	<div class="flash-message flash-err">
 		<%= err %>
-	</h4>
+	</div>
 <% } %>
+
+<!-- Authentication up form -->
+<div class="forground-form-container d-none">
+	<div class="forground-form">
+		<div class="signup-register-container">
+			<div class="auth-choice-container signup-container make-border-down">
+				<p class="m-auto">
+					Login
+				</p>
+			</div>
+			<div class="auth-choice-container login-container pressed-btn make-border-right make-border-left">
+				<p class="m-auto">
+					Sign up
+				</p>
+			</div>
+			<div class="auth-choice-filler give-border-bottom">
+				<span class="m-auto"></span><span class="icon-container"><i class="far fa-times-circle exit-icon"></i></span>
+			</div>
+		</div>
+		
+		<div class="auth-form-container">
+			
+			<!-- Register form -->
+			<form class="auth-form register-form make-border-right" action="/signup" method="POST">
+				<input placeholder="Enter a username" type="text" class="form-input-ele" name="username">
+				<input placeholder="Enter your name" type="text" class="form-input-ele" name="namefeild">
+				<input placeholder="Enter your password" type="password" class="form-input-ele" name="password">
+				<button class="form-input-ele form-submit" type="submit">
+					Create acount
+				</button>
+			</form>
+			
+			<!-- Login form -->
+			<form class="auth-form login-form make-border-right d-none" action="/login" method="POST">
+				<input placeholder="Enter a username" type="text" class="form-input-ele" name="username">
+				<input placeholder="Enter your password" type="password" class="form-input-ele" name="password">
+				<button class="form-input-ele form-submit" type="submit">
+					Login
+				</button>
+			</form>
+			
+			<!-- Oauth form -->
+			<form class="auth-form oauth-form">
+				<a href="/login/google" type="text" class="form-input-ele oauth-ele oauth-google">
+					<p class="m-auto">
+						Use Google acount
+					</p>
+				</a>
+				<a href="/login/facebook" type="text" class="form-input-ele oauth-ele bg-primary oauth-facebook">
+					<p class="m-auto">
+						Use Facebook acount
+					</p>
+				</a>
+				<a href="/login/github" type="text" class="form-input-ele oauth-ele oauth-github">
+					<p class="m-auto">
+						Use Github acount
+					</p>
+				</a>
+			</form>
+		</div>
+		
+
+	</div>
+</div>
 
 <!-- Banner -->
 <div class="banner-bg">
@@ -21,7 +85,7 @@
 <!-- Skills -->
 <div class="section-bg">
   <div class="section-container">
-	<h2 class="section-title">Skils</h2>
+	<h2 class="section-title special">Skils</h2>
 	<div class="make-line"></div>          
 	<div class="row skill-row">
 	  <div class="col-sm-6 category-container">

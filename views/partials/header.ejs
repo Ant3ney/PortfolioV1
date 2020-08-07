@@ -28,22 +28,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active navele-margin-left snap-right-sm">
-              <a class="nav-link" href="#">Home</a>
+              <a id="nav-skills" class="nav-link" href="#">Skills</a>
             </li>
             <li class="nav-item navele-margin-left snap-right-sm">
-              <a class="nav-link" href="#">Resume</a>
+              <a id="nav-resume" class="nav-link" href="#">Resume</a>
             </li>
             <li class="nav-item navele-margin-left snap-right-sm">
-              <a class="nav-link" href="#">Projects</a>
+              <a id="nav-projects" class="nav-link" href="#">Projects</a>
             </li>
           </ul>
           <ul class="navbar-nav">
-            <li class="nav-item snap-right-sm">
-                <a class="nav-link" href="#">Login</a>
-              </li>
-              <li class="nav-item navele-margin-right snap-right-sm">
-                <a class="nav-link" href="#">Sign up</a>
-              </li>
+			  <% if(!currentUser){ %>
+				<li class="nav-item snap-right-sm nav-login">
+					<a class="nav-link">Login</a>
+				  </li>
+				  <li class="nav-item navele-margin-right snap-right-sm nav-register">
+					<a class="nav-link">Sign up</a>
+				  </li>
+			  <% } else{ %>
+				  <li class="nav-item navele-margin-right snap-right-sm nav-logout">
+					<a class="nav-link" href="/logout">Sign out</a>
+				  </li>
+			  <% } %>
           </ul>
         </div>
     </nav>

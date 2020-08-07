@@ -27,7 +27,7 @@ router.get("/signup", (req, res) => {
 //Invalid credentials router
 router.get("/invalid", (req, res) => {
 	req.flash("error", "username or password is invalid");
-	res.redirect("/login");
+	res.redirect("/");
 });
 
 //Local sign up
