@@ -1,0 +1,39 @@
+<!-- New project view -->
+<%- include("../partials/altHeader") -%>
+	<!-- Custum css -->
+	<link rel="stylesheet" type="text/css" href="/css/projectStyle.css">
+	<div class="section-bg">
+		<div class="section-container">
+			<h2 class="section-title special">
+				Add Project	
+			</h2>
+			<form class="project-form" action="/project" method="POST">
+				<input class="form-ele" type="text" name="imgUrl" placeholder="image url">
+				<input class="form-ele mt-2" type="text" name="title" placeholder="Project title">
+				<textarea class="form-ele mt-2" name="description" placeholder="Project description"></textarea>
+				<div class="form-ele mt-2 d-flex">
+					<div class="text-container p-0">
+						<p class="mb-0 mr-5 my-auto">
+							Has visit link
+						</p>
+					</div>
+					<input class="my-auto checkbox-pro-option" type="checkbox" name="visitableProject">
+				</div>
+				<input class="form-ele mt-2" type="text" name="visitUrl" placeholder="url">
+				<div class="form-ele mt-2 d-flex">
+					<div class="text-container p-0">
+						<p class="mb-0 mr-5 my-auto">
+							Can visit?
+						</p>
+					</div>
+					<input class="my-auto checkbox-pro-option" type="checkbox" name="visitableProject">
+				</div>
+				<input class="form-ele mt-2" type="text" name="githubUrl" placeholder="Github url">
+				<button class="form-ele styled-button mt-2" type="submit">
+					Create project
+				</button>
+			</form>
+		</div>	
+	</div>
+	
+<%- include("../partials/altFooter") -%>

@@ -15,7 +15,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
 	  
 	  <!-- Custum css -->
-	  <link rel="stylesheet" type="text/css" href="/css/main01.css">
+	  <link rel="stylesheet" type="text/css" href="/css/main02.css">
 	
    <title>Anthony Full Stack</title>
 </head>
@@ -31,22 +31,35 @@
               <a id="nav-skills" class="nav-link" href="#">Skills</a>
             </li>
             <li class="nav-item navele-margin-left snap-right-sm">
-              <a id="nav-resume" class="nav-link" href="#">Resume</a>
+              <a id="nav-resume" class="nav-link" href="/download">Resume</a>
             </li>
             <li class="nav-item navele-margin-left snap-right-sm">
               <a id="nav-projects" class="nav-link" href="#">Projects</a>
             </li>
           </ul>
           <ul class="navbar-nav">
+			  
+			  	<% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %>
+			  	 <li class="nav-item dropdown snap-right-sm nav-ass-skill dropdown-container">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  Add
+					</a>
+					<div class="dropdown-menu nav-item snap-right-sm nav-ass-skill dropdown-container-menu" aria-labelledby="navbarDropdown">
+					  	<a href="/skill/new" class="nav-link dropdown-item">Skill</a>
+						<a href="/project/new" class="nav-link dropdown-item">Project</a>
+					</div>
+				  </li>
+			  	<% } %>
+			  
 			  <% if(!currentUser){ %>
-				<li class="nav-item snap-right-sm nav-login">
+				<li class="nav-item snap-right-sm nav-login <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> navele-margin-right <% } %>">
 					<a class="nav-link">Login</a>
 				  </li>
 				  <li class="nav-item navele-margin-right snap-right-sm nav-register">
 					<a class="nav-link">Sign up</a>
 				  </li>
 			  <% } else{ %>
-				  <li class="nav-item navele-margin-right snap-right-sm nav-logout">
+				  <li class="ex-sm-mar nav-item navele-margin-right snap-right-sm nav-logout <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> navele-margin-right ex-sm-mar<% } %>">
 					<a class="nav-link" href="/logout">Sign out</a>
 				  </li>
 			  <% } %>

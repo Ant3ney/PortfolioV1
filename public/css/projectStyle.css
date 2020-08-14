@@ -1,0 +1,11 @@
+.project-form{
+	display: flex;
+	flex-direction: column;
+}
+.form-ele{
+	
+}
+.checkbox-pro-option{
+	width: 2rem;
+	height: 2rem;
+}

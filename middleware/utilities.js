@@ -3,6 +3,60 @@ var middle = {};
 var express = require("express");
 var app = express();
 
+middle.tempLog = (msg) => {
+	console.log("-*Delete later*-");
+	console.log(msg);
+}
+
+//create new project object
+middle.assembleProject = (req) => {
+	var body = req.body;
+	
+	var visitableProject = "false";
+	var visitableScorce = "false";
+	if(body.visitableProject === "on"){
+		visitableProject = "true";
+	}
+	if(body.visitableScorce === "on"){
+		visitableScorce = "true";
+	}
+	
+	
+	var projectObj = {
+		thumbnail: body.imgUrl,
+		title: body.title,
+		description: body.description,
+		hasVisit: visitableProject,
+		visit: body.visitUrl,
+		hasGitHub: visitableScorce,
+		github: body.githubUrl
+	}
+	
+	return projectObj;
+}
+
+//create new skill catetegory object
+middle.assembleSkillCat = (req) => {
+	var body = req.body;
+	var skillCat;
+	var skills = [];
+	var skillTitle = body["category-ele"];
+	var i = 0;
+	
+	while(req.body[("skill-ele-" + i)]){
+		skills.push((body[("skill-ele-" + i)]).toString());
+
+		i++;
+	}
+	
+	skillCat = {
+		category: skillTitle,
+		skill: skills
+	}
+	
+	return skillCat;
+}
+
 //create new local user
 middle.assembleLocalUser = (username, name, hash) => {
 	var newUser = {

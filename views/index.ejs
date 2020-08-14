@@ -88,65 +88,29 @@
 	<h2 class="section-title special">Skils</h2>
 	<div class="make-line"></div>          
 	<div class="row skill-row">
-	  <div class="col-sm-6 category-container">
-		<h4 class="skill-cat">Back end</h4>
-		<ul class="skill-ul su-1">
-		  <li class="skill-li sl-1">Node js</li>
-		  <li class="skill-li sl-1">Javascript</li>
-		  <li class="skill-li sl-1">Git / Github</li>
-		  <li class="skill-li sl-1">Node js</li>
-		  <li class="skill-li sl-1 d-none">Node js</li>
-		  <li class="skill-li sl-1 d-none">Javascript</li>
-		  <li class="skill-li sl-1 d-none">Git / Github</li>
-		  <li class="skill-li sl-1 d-none">Node js</li>
-		</ul>
-		<button class="see-all-skills sas-01">See all</button>
-	  </div>
-
-	  <div class="col-sm-6 category-container skill-category-2">
-		<h4 class="skill-cat">Front end</h4>
-		<ul class="skill-ul su-2">
-		  <li class="skill-li sl-2">Javascript</li>
-		  <li class="skill-li sl-2">CSS</li>
-		  <li class="skill-li sl-2">HTML</li>
-		  <li class="skill-li sl-2">React</li>
-		  <li class="skill-li sl-2 d-none">Javascript</li>
-		  <li class="skill-li sl-2 d-none">CSS</li>
-		  <li class="skill-li sl-2 d-none">HTML</li>
-		  <li class="skill-li sl-2 d-none">React</li>
-		</ul>
-		<button class="see-all-skills sas-02">See all</button>
-	  </div>
-
-	  <div class="col-sm-6 category-container lower-skill-category lower-category">
-		<h4 class="skill-cat">Frameworks / librarys</h4>
-		<ul class="skill-ul su-3">
-		  <li class="skill-li sl-3">Node js</li>
-		  <li class="skill-li sl-3">React</li>
-		  <li class="skill-li sl-3">Bootstrap</li>
-		  <li class="skill-li sl-3">Passport js</li>
-		  <li class="skill-li sl-3 d-none">Node js</li>
-		  <li class="skill-li sl-3 d-none">React</li>
-		  <li class="skill-li sl-3 d-none">Bootstrap</li>
-		  <li class="skill-li sl-3 d-none">Passport js</li>
-		</ul>
-		<button class="see-all-skills sas-03">See all</button>
-	  </div>
-
-	  <div class="col-sm-6 category-container lower-skill-category lower-category">
-		<h4 class="skill-cat">Softwares</h4>
-		<ul class="skill-ul su-4">
-		  <li class="skill-li sl-4">Gimp</li>
-		  <li class="skill-li sl-4">Photoshop</li>
-		  <li class="skill-li sl-4">Unity</li>
-		  <li class="skill-li sl-4">Blender</li>
-		  <li class="skill-li sl-4 d-none">Gimp</li>
-		  <li class="skill-li sl-4 d-none">Photoshop</li>
-		  <li class="skill-li sl-4 d-none">Unity</li>
-		  <li class="skill-li sl-4 d-none">Blender</li>
-		</ul>
-		<button class="see-all-skills sas-04">See all</button>
-	  </div>
+		
+	  <!-- Skill cat -->
+		<% if(!skillCats){ skillCats=[] } %>
+		<% skillCats.forEach((skillCat, i) => { %>
+		<div class="col-sm-6 category-container <% if(i === 1){ %> skill-category-2 <% }else if(i > 1){ %> lower-skill-category lower-category <% } %> <% if(i > 3){ %> d-none <% } %>">
+			<h4 class="skill-cat"><%= skillCat.category %></h4>
+			<ul class="skill-ul su-<%= (i + 1) %>">
+				<% skillCat.skill.forEach((skill, j) => { %>
+					<li class="skill-li sl-<%= (i + 1) %> <%if(j > 3){ %> d-none <% } %>"><%= skill %></li>
+				<% }) %>
+			</ul>
+			<div class="skill-buttons-container d-flex">
+				<button class="see-all-skills sas-0<%= (i + 1) %> <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> ml-auto mr-3 <% } %>">See all</button>
+				<a href="/skill/<%= skillCat._id %>/edit" class="see-all-skills normalize-link fix-letter-space <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> mr-auto ml-3 <% }else{ %> d-none <%} %>">Edit</a>
+			</div>
+		</div>
+		<% }) %>
+		
+		<% if(skillCats.length > 4){ %> 
+			<div class="skill-buttons-container d-flex see-sll-skill-cat-container">
+				<button class="see-all-skills ml-auto mr-auto">See all categorys</button>
+			</div>
+		<% } %>
 	</div>
   </div>
 </div>
@@ -159,109 +123,37 @@
 	<div class="row all-projects-container">
 
 	  <!-- Project -->
-	  <div class="col-xl-4 col-md-6 project-col-container">
-		<div class="project-container">
-		  <img src="https://serene-williams-bb8bee.netlify.app/images/Portfolieo/SingularityBlog.png" class="project-thumbnail">
-		  <div class="text-container">
-			<h4 class="project-title">Singularity Blog</h4>
-			<p class="project-description">Forage stumptown salvia organic slow-
-			  carb gastropub lomo. Brunch sartorial 
-			</p>
-			<div class="project-link-container">
-			  <a href="#" class="visit-project linkify">Visit</a>
-			  <a href="#" class="visit-github linkify">Github</a>
+		<% projects.forEach((project, i) => { %> 
+		  <div class="col-xl-4 col-md-6 project-col-container <% if(i == 1){ %> project-col-2 <% }else if(i == 2){ %> lower-project-3 <% }else if(i > 2){ %> lower-project-3 lower-project-below-4 d-none <% } %>">
+			<div class="project-container">
+			  <img src="<%= project.thumbnail %>" class="project-thumbnail">
+			  <div class="text-container">
+				<h4 class="project-title"><%= project.title %></h4>
+				<p class="project-description">
+					<%= project.description %>
+				</p>
+				<div class="project-link-container">
+					<% if(project.hasVisit === "true"){ %> 
+				  		<a href="<%= project.visit %>" class="visit-project linkify">Visit</a>
+					<% } else{%> 
+						<a href="<%= project.github %>" class="visit-github linkify">Github</a>
+					<% } %>
+					<% if(project.hasVisit === "true" && project.hasGitHub === "true"){ %> 
+				  		<a href="<%= project.github %>" class="visit-github linkify">Github</a>
+					<% } %>
+				</div>
+				 <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %>
+					<a href="/project/<%= project._id %>/edit" class="styled-button edit-project-edit-btn">Edit</a>
+				 <% } %>
+			  </div>
 			</div>
 		  </div>
-		</div>
-	  </div>
-
-	  <!-- Project -->
-	  <div class="col-xl-4 col-md-6 project-col-2 project-col-container">
-		<div class="project-container">
-		  <img src="https://serene-williams-bb8bee.netlify.app/images/Portfolieo/Hoodflix.png" class="project-thumbnail">
-		  <div class="text-container">
-			<h4 class="project-title">Hoodflix</h4>
-			<p class="project-description">Forage stumptown salvia organic slow-
-			  carb gastropub lomo. Brunch sartorial 
-			</p>
-			<div class="project-link-container">
-			  <a href="#" class="visit-project linkify">Visit</a>
-			  <a href="#" class="visit-github linkify">Github</a>
-			</div>
-		  </div>
-		</div>
-	  </div>
-
-	  <!-- Project -->
-	  <div class="col-xl-4 col-md-6 lower-project-3 project-col-container">
-		<div class="project-container">
-		  <img src="https://serene-williams-bb8bee.netlify.app/images/Portfolieo/KombatClubAlfaPoster.jpg" class="project-thumbnail">
-		  <div class="text-container">
-			<h4 class="project-title">Kombat Club</h4>
-			<p class="project-description">Forage stumptown salvia organic slow-
-			  carb gastropub lomo. Brunch sartorial 
-			</p>
-			<div class="project-link-container">
-			  <a href="#" class="visit-project linkify">Visit</a>
-			  <a href="#" class="visit-github linkify">Github</a>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	  
-	  <!-- Project -->
-	  <div class="col-xl-4 col-md-6 lower-project-3 lower-project-below-4 project-col-container d-none">
-		<div class="project-container">
-		  <img src="https://serene-williams-bb8bee.netlify.app/images/Portfolieo/Hoodflix.png" class="project-thumbnail">
-		  <div class="text-container">
-			<h4 class="project-title">Hoodflix</h4>
-			<p class="project-description">Forage stumptown salvia organic slow-
-			  carb gastropub lomo. Brunch sartorial 
-			</p>
-			<div class="project-link-container">
-			  <a href="#" class="visit-project linkify">Visit</a>
-			  <a href="#" class="visit-github linkify">Github</a>
-			</div>
-		  </div>
-		</div>
-	  </div>
-		
-		<!-- Project -->
-	  <div class="col-xl-4 col-md-6 lower-project-3 lower-project-below-4 project-col-container d-none">
-		<div class="project-container">
-		  <img src="https://serene-williams-bb8bee.netlify.app/images/Portfolieo/Hoodflix.png" class="project-thumbnail">
-		  <div class="text-container">
-			<h4 class="project-title">Hoodflix</h4>
-			<p class="project-description">Forage stumptown salvia organic slow-
-			  carb gastropub lomo. Brunch sartorial 
-			</p>
-			<div class="project-link-container">
-			  <a href="#" class="visit-project linkify">Visit</a>
-			  <a href="#" class="visit-github linkify">Github</a>
-			</div>
-		  </div>
-		</div>
-	  </div>
-		
-		<!-- Project -->
-	  <div class="col-xl-4 col-md-6 lower-project-3 lower-project-below-4 project-col-container d-none">
-		<div class="project-container">
-		  <img src="https://serene-williams-bb8bee.netlify.app/images/Portfolieo/Hoodflix.png" class="project-thumbnail">
-		  <div class="text-container">
-			<h4 class="project-title">Hoodflix</h4>
-			<p class="project-description">Forage stumptown salvia organic slow-
-			  carb gastropub lomo. Brunch sartorial 
-			</p>
-			<div class="project-link-container">
-			  <a href="#" class="visit-project linkify">Visit</a>
-			  <a href="#" class="visit-github linkify">Github</a>
-			</div>
-		  </div>
-		</div>
-	  </div>
+		<% }) %>
 		
 	  </div>
-	<button class="see-all-projects">See all</button>
+	  <% if(projects.length > 3){ %> 
+		<button class="see-all-projects">See all</button>
+	  <% } %>
   </div>
 </div>
 
@@ -290,11 +182,11 @@
 	</div>
 
 	<h2 class="section-title">Contact me</h2>
-	<form class="contct-form">
+	<form class="contct-form" action="/contactMe" method="POST">
 	  <label>Email</label>
-	  <input class="contact-text mt-3" type="text">
+	  <input class="contact-text mt-3" type="email" name="email">
 	  <label class="mt-2 mb-0">Message</label>
-	  <textarea class="contact-text mt-2"></textarea>
+	  <textarea class="contact-text mt-2" name="message"></textarea>
 	  <button type="submit" class="styled-button mt-4">Send</button>
 	</form>
   </div>

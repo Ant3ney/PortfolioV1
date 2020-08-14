@@ -11,7 +11,8 @@ var bodyParser = require("body-parser"),
 	passport = require("passport"),
 	User = require("./models/users"),
 	expressSession = require("express-session"),
-	flash = require('connect-flash');
+	flash = require('connect-flash'),
+	methodOveride = require("method-override");
 
 //passport setup
 app.use(expressSession({
@@ -35,10 +36,12 @@ app.use((req, res, next) => {
 	req.app.locals.currentUser = req.user;
 	req.app.locals.message = req.flash('authentication');
 	req.app.locals.err = req.flash('error');
+	
 	next();
 });
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOveride("_method"));
 
 //connecting mongoose
 mongoose.connect(process.env.DBURL, {
@@ -51,6 +54,7 @@ mongoose.connect(process.env.DBURL, {
 	console.log("Something went wrong");
 	console.log(err.message);
 });
+mongoose.set('useFindAndModify', false);
 
 //Handling routs
 //route file locations
@@ -62,6 +66,7 @@ app.use(indexRouts);
 
 //app setings
 app.set("view engine", "ejs");
+
 
 app.listen(process.env.PORT || 3000, process.env.IP, () => {
 	console.log("Server has started!");

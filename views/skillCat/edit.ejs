@@ -1,0 +1,42 @@
+<%- include("../partials/altHeader") -%>
+<div class="section-container section-bg">
+	<form class="skill-form px-5" action="/skill/<%= skillCat._id %>?_method=PUT" method="POST">
+		<label class="my-2 skill-label">
+			Skill category
+		</label>
+		<input class="form-ele category-ele" type="text" name="category-ele" placeholder="BackEnd" value="<%= skillCat.category %>">
+		<label class="my-2 skill-label">
+			Skills
+		</label>
+		<div class="multi-skill-container mb-2">
+			<% skillCat.skill.forEach((skill, i) => { %> 
+				<div class="single-skill-container">
+					<input class="skill-ele form-ele skill-ele-0 mb-2" type="text" name="skill-ele-<%= i %>" placeholder="nodejs" value="<%= skill %>">
+					<span class="m-auto"></span><span class="icon-container del-icon-container"><i class="far fa-times-circle exit-icon skill-delete-icon"></i></span>
+				</div>
+			<% }); %>
+		</div>
+		<div class="row">
+			<div class="col-md-4 d-flex">
+				<button id="add-skill" class="styled-button skill-action-btn">
+					Add skill
+				</button>
+			</div>
+			<div class="col-md-4 d-flex">
+				<button class="styled-button skill-action-btn" type="submit">
+					Update
+				</button>
+			</div>
+			<div class="col-md-4 d-flex">
+				<!-- Todo make delete button change mwthood to delete and action to /skill/:id -->
+				<button class="styled-button skill-action-btn dele-btn">
+					Delete
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<!-- Custum javascript -->
+	<script src="/js/skillFunction.js"></script>
+<%- include("../partials/altFooter") -%>

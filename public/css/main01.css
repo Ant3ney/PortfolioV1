@@ -400,6 +400,29 @@ textarea.contact-text{
     box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
 }
 
+.skill-form{
+	display: flex;
+	flex-direction: column;
+}
+.form-ele{
+	width: 100%;
+	border: 0.05rem solid lightgray;
+	padding: 1rem;
+	padding-left: 0.5rem;
+}
+.form-ele:focus{
+	outline: 0;
+}
+.skill-label{
+	font-size: 2rem;
+}
+.skill-action-btn{
+	width: 90%;
+	margin-left: auto; 
+	margin-right: auto;
+	padding: .5rem;
+}
+
 @media only screen and (max-width: 1550px) {
     .section-container{
         margin-left: 3rem;
