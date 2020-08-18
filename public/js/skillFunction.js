@@ -1,6 +1,6 @@
 var skillsContainer = document.querySelector(".multi-skill-container");
 var addSkill = document.querySelector("#add-skill");
-var index = 1;
+var index = document.getElementsByClassName("skill-ele").length;
 var deleteSkillIcons = document.getElementsByClassName("del-icon-container");
 
 function deleteIconPressOfIndex(i){

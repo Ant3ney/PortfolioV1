@@ -100,8 +100,10 @@
 				<% }) %>
 			</ul>
 			<div class="skill-buttons-container d-flex">
-				<button class="see-all-skills sas-0<%= (i + 1) %> <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> ml-auto mr-3 <% } %>">See all</button>
-				<a href="/skill/<%= skillCat._id %>/edit" class="see-all-skills normalize-link fix-letter-space <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> mr-auto ml-3 <% }else{ %> d-none <%} %>">Edit</a>
+				<% if(skillCat.skill.length > 4){ %>
+					<button class="see-all-skills sas-0<%= (i + 1) %> <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> ml-auto mr-3 <% } %>">See all</button>
+				<% } %>
+				<a href="/skill/<%= skillCat._id %>/edit" class="see-all-skills normalize-link fix-letter-space <% if(skillCat.skill.length <= 4 && currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> mx-auto <% }else if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> mr-auto ml-3 <% }else{ %> d-none <%} %>">Edit</a>
 			</div>
 		</div>
 		<% }) %>

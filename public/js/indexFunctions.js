@@ -154,6 +154,9 @@ var su = document.querySelectorAll(".skill-ul");
 su.forEach((suel, i) => {
 	var sl = document.querySelectorAll(".sl-" + (i + 1));
 	var btn = document.querySelector(".sas-0" + (i + 1));
+	if(!btn){
+		return;
+	}
 	btn.addEventListener("click", () => {
 		if (!btn.classList.contains("pressed-button")){
 			btn.classList.add("pressed-button");
