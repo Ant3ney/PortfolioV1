@@ -136,12 +136,12 @@
 				</p>
 				<div class="project-link-container">
 					<% if(project.hasVisit === "true"){ %> 
-				  		<a href="<%= project.visit %>" class="visit-project linkify">Visit</a>
+				  		<a target=”_blank” href="<%= project.visit %>" class="visit-project linkify">Visit</a>
 					<% } else{%> 
-						<a href="<%= project.github %>" class="visit-github linkify">Github</a>
+						<a target=”_blank” href="<%= project.github %>" class="visit-github linkify">Github</a>
 					<% } %>
 					<% if(project.hasVisit === "true" && project.hasGitHub === "true"){ %> 
-				  		<a href="<%= project.github %>" class="visit-github linkify">Github</a>
+				  		<a target=”_blank” href="<%= project.github %>" class="visit-github linkify">Github</a>
 					<% } %>
 				</div>
 				 <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %>
@@ -175,20 +175,20 @@
 	  </div>
 	  <div class="contact-info-pair mt-3">
 		<h4 class="contact-label">Facebook:&nbsp;</h4>
-		<a href="#" class="contact-data linkify">AnthonyCavuoti</a>
+		<a target=”_blank” href="https://www.facebook.com/anthony.cavuoti" class="contact-data linkify">AnthonyCavuoti</a>
 	  </div>
 	  <div class="contact-info-pair mt-3">
 		<h4 class="contact-label">Linkedin:&nbsp;</h4>
-		<a href="#" class="contact-data linkify">Ant3ny</a>
+		<a target=”_blank” href="https://www.linkedin.com/in/anthony-cavuoti-b8a1911a9/" class="contact-data linkify">Ant3ny</a>
 	  </div>
 	</div>
 
 	<h2 class="section-title">Contact me</h2>
 	<form class="contct-form" action="/contactMe" method="POST">
-	  <label>Email</label>
-	  <input class="contact-text mt-3" type="email" name="email">
-	  <label class="mt-2 mb-0">Message</label>
-	  <textarea class="contact-text mt-2" name="message"></textarea>
+	  <label class="mb-0">Email</label>
+	  <input class="contact-text my-3" type="email" name="email">
+	  <label class="mb-3">Message</label>
+	  <textarea class="contact-text" name="message"></textarea>
 	  <button type="submit" class="styled-button mt-4">Send</button>
 	</form>
   </div>
