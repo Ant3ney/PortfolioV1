@@ -2,16 +2,26 @@ var skillsContainer = document.querySelector(".multi-skill-container");
 var addSkill = document.querySelector("#add-skill");
 var index = document.getElementsByClassName("skill-ele").length;
 var deleteSkillIcons = document.getElementsByClassName("del-icon-container");
+var skillEle = document.getElementsByClassName("skill-ele");
 
 function deleteIconPressOfIndex(i){
 	var icon = document.getElementsByClassName("del-icon-container")[i];
 	var iconContainer = document.getElementsByClassName("single-skill-container")[i];
-	console.log("Delete pressed from " + (i + 1));
 	iconContainer.remove();
+	refactorEles();
+	index--;
 }
 
 function deleteEleParrent(ele){
 	ele.parentNode.remove();
+	refactorEles();
+	index--;
+}
+
+function refactorEles(){
+	for(var i = 0 ; i < skillEle.length; i++){
+		skillEle[i].setAttribute("name", "skill-ele-" + i);
+	}
 }
 
 //Add eventlisteners to delete icons
