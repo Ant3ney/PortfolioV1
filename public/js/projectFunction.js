@@ -4,10 +4,16 @@ var form = document.querySelector(".project-form-js");
 
 //Add delete btn functionality
 function deleteBtnPressed(){
-	var id = window.location.href.toString().split(window.location.host)[1].split("/")[2];
+	var id = getId();
 	form.setAttribute("action", "/project/" + id + "?_method=DELETE");
-	
-	console.log("Delete action: " + form.getAttribute("action"));
+}
+
+function getId(){
+	var url = window.location.href.toString();
+	var domain = window.location.host;
+	var dirHref = url.split(domain)[1];
+	var id = dirHref.split("/")[2];
+	return id;
 }
 
 if(deleteBtn){

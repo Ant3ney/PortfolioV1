@@ -25,6 +25,11 @@ if(seeAllCatBtn){
 
 //-- Pop up authentication form start --
 
+//Detect Safari 
+let safariAgent = navigator.userAgent.indexOf("Safari") > -1; 
+//Detect Chrome 
+let chromeAgent = navigator.userAgent.indexOf("Mozilla") > -1
+
 //Grab form elements
 var loginBtn = document.getElementsByClassName("auth-choice-container")[0];
 var signUpBtn =  document.getElementsByClassName("auth-choice-container")[1];
@@ -37,15 +42,15 @@ var signUpNavBtn = document.getElementsByClassName("nav-register")[0];
 
 //Be warned. The naming scheme here is a mess
 function signUpPressed(){
-	if(signupOrLoginActive() === "login"){//if login is active
-		var makeVisable = "register";
+	if(!signUpBtn.classList.contains("pressed-btn")){
+		var makeVisable = "login";
 		toggleStyle(makeVisable);
 		toggleForm(makeVisable);
 	}
 }
 function loginPressed(){
-	if(signupOrLoginActive() === "signup"){//if signup is active
-		var makeVisable = "login";
+	if(signUpBtn.classList.contains("pressed-btn")){
+		var makeVisable = "register";
 		toggleStyle(makeVisable);
 		toggleForm(makeVisable);
 	}
@@ -61,17 +66,8 @@ function loginNavPressed(){
 	authenticationTab.classList.remove("d-none");
 	loginPressed();
 }
-function signupOrLoginActive(){
-	console.log(signUpBtn.classList.contains("pressed-btn"));
-	if(signUpBtn.classList.contains("pressed-btn")){
-		return "signup"
-	}
-	else{
-		return "login"
-	}
-}
 function toggleStyle(makeFocus){
-	if(makeFocus === "login"){
+	if(makeFocus === "register"){
 		signUpBtn.classList.remove("make-border-left");
 		signUpBtn.classList.remove("make-border-right");
 		loginBtn.classList.add("make-border-right");
@@ -87,7 +83,7 @@ function toggleStyle(makeFocus){
 	}
 }
 function toggleForm(makeVisable){
-	if(makeVisable == "login"){
+	if(makeVisable == "register"){
 		signUpBtn.classList.remove("pressed-btn");
 		registerForm.classList.add("d-none");
 		loginForm.classList.remove("d-none");
@@ -114,11 +110,6 @@ var navSkill = document.getElementById("nav-skills");
 var navResume = document.getElementById("nav-resume");
 var navProject = document.getElementById("nav-projects");
 var sections = document.getElementsByClassName("section-container");
-
-//Detect Safari 
-let safariAgent = navigator.userAgent.indexOf("Safari") > -1; 
-//Detect Chrome 
-let chromeAgent = navigator.userAgent.indexOf("Mozilla") > -1
 
 navSkill.addEventListener("click", () => {
 	

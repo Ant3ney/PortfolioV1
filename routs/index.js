@@ -50,7 +50,7 @@ router.post("/contactMe", (req, res) => {
 
 //test send file
 router.get("/download", (req, res) => {
-	res.download(__dirname + "/../downloads/M191-Sum20-Quiz1.pdf");	
+	res.download(__dirname + "/../downloads/ResumeAnthonyCavuotifullstackwebdeveloper.pdf");	
 });
 
 module.exports = router;
