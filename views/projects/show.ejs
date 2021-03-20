@@ -1,0 +1,152 @@
+<%- include('../partials/altHeader') -%>
+<style>
+    html{
+        background-color: #EFF6FB;
+    }
+    body{
+        display:flex;
+        flex-direction: column;
+        height: auto;
+        background-color: #EFF6FB;
+    }
+</style>
+<div class="section-bg my-0 extra-project-page-conter-style">
+    <div class="section-container">
+        <h2 class="section-title align-left mb-2 extra-project-page-section-title-style">24/7 Sale</h2>
+        <div class='row top-project-row'>
+            <div class='col-md-6 porject-info-col'>
+                <img class='project-page-img' src='https://serene-williams-bb8bee.netlify.app/images/247Sales/247SaleThumbnail.png'>
+                <div class='project-page-desciption mt-3'>
+                    Singularity blog was designed with Adobe XD and follows the neuromorphic UI design trend.
+                </div>     
+                <div class='project-page-action-buttons-container mt-3'>
+                    <span class='project-page-visit-action-button mr-3'><a href='#' class='linkify project-action-button'>Visit</a><a href='#' class='linkify project-action-button'><i class="fas fa-external-link-alt"></i></a></span>
+                    <span class='project-page-github-action-button'><a href='#' class='linkify project-action-button'><i class="fab fa-github"></i></a></span>
+                </div>    
+            </div>
+            <div class='col-md-6 mb-0 project-page-skills-involved-container'>
+                <h3 class='project-page-skills-involved-header'>Skills Involved</h3>
+                <div class='row project-page-skills-involved-row'>
+                    
+                    <div class='col-6 project-page-skills-col pl-0'>
+                        <ul class='project-page-skills-ul'>
+                        </ul>
+                    </div>
+                    <div class='col-6  project-page-skills-col '>
+                        <ul class='project-page-skills-ul'>
+                        </ul>
+                    </div>
+                </div>
+                <button class="see-all-projects mx-auto">See all</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //#region skill items list
+        let projectPage = {};
+        projectPage.projectSkills = ['React', 'HTML', 'CSS', 'Javascript', 'NodeJS', 'AdobieXD', 'FetchAPI', 'Bootstrap', 'React-Contex', 'PassportJS', 'React', 'HTML', 'CSS', 'Javascript', 'NodeJS', 'AdobieXD', 'FetchAPI', 'Bootstrap', 'React-Contex', 'PassportJS'];
+        projectPage.list1 = document.getElementsByClassName('project-page-skills-ul')[0];
+        projectPage.list2 = document.getElementsByClassName('project-page-skills-ul')[1];
+        projectPage.skillDisplayToggle = document.querySelector('.see-all-projects');
+        projectPage.fullSkillsVisable = false;
+
+        projectPage.setUpProjectSkillsWith = function (skills){
+            const list1 = projectPage.list1;
+            const list2 = projectPage.list2;
+            skills.forEach((skill, i) => {
+                const li = document. createElement("LI");
+                const a = document.createElement("A");
+                li.classList.add('project-page-skill-item-li');
+                a.classList.add('linkify');
+                a.innerText = skill;
+                a.setAttribute('href', '#');
+
+                if(i !== 0 && i !== 1){
+                    li.classList.add('mt-3');
+                }
+                if(i > 9){
+                    li.classList.add('d-none');
+                }
+
+                li.appendChild(a);
+                if(i % 2 === 0){
+                    list1.appendChild(li);
+                }
+                else{
+                    list2.appendChild(li);
+                }
+            });
+        }
+        projectPage.pressedSeeAllSkills = () => {
+            const list1 = projectPage.list1;
+            const list2 = projectPage.list2;
+            const displayButtonToggle = projectPage.skillDisplayToggle;
+            let lis = projectPage.getConcatListArrays(list1, list2);
+            
+            lis.forEach((li) => {
+                projectPage.showEle(li);
+            });
+
+            displayButtonToggle.innerText = 'Show less';
+        }
+        projectPage.pressedSeeLessSkills = () => {
+            const list1 = projectPage.list1;
+            const list2 = projectPage.list2;
+            const displayButtonToggle = projectPage.skillDisplayToggle;
+            let list1Ary = projectPage.toArray(list1.getElementsByTagName('li'));
+            let list2Ary = projectPage.toArray(list2.getElementsByTagName('li'));
+
+            list1Ary.forEach((li, i) => {
+                if(i > 5){
+                    projectPage.hideEle(li);
+                }
+            });
+            list2Ary.forEach((li, i) => {
+                if(i > 5){
+                    projectPage.hideEle(li);
+                }
+            });
+
+            displayButtonToggle.innerText = 'Show more';
+        }
+        projectPage.toggleSeeFullSkills = () => {
+            if(projectPage.fullSkillsVisable){
+                projectPage.fullSkillsVisable = false;
+                projectPage.pressedSeeLessSkills();
+            }
+            else{
+                projectPage.fullSkillsVisable = true;
+                projectPage.pressedSeeAllSkills();
+            }
+        }
+        projectPage.getConcatListArrays = (list1, list2) => {
+            let list1Ary = projectPage.toArray(list1.getElementsByTagName('li'));
+            let list2Ary = projectPage.toArray(list2.getElementsByTagName('li'));
+            let lis = list1Ary.concat(list2Ary);
+
+            return lis;
+        }
+        projectPage.showEle = (ele) => {
+            while(ele.classList.contains('d-none')){
+                ele.classList.remove('d-none');
+            }
+        }
+        projectPage.hideEle = ele => {
+            ele.classList.add('d-none');
+        }
+        projectPage.toArray = (obj) => {
+          var array = [];
+          // iterate backwards ensuring that length is an UInt32
+          for (var i = obj.length >>> 0; i--;) { 
+            array[i] = obj[i];
+          }
+          return array;
+        }
+
+        //exicution
+        projectPage.setUpProjectSkillsWith(projectPage.projectSkills);
+        projectPage.skillDisplayToggle.addEventListener('click', projectPage.toggleSeeFullSkills);
+    //#endregion
+</script>
+<%- include('../partials/altFooter') -%>

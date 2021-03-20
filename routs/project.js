@@ -6,6 +6,12 @@ module.exports = (router) => {
 	router.get("/project/new", (req, res) => {
 		res.render("projects/new");
 	});
+
+	//show project of id
+	router.get("/project/:id", (req, res) => {
+		var id = req.params.id;
+		res.render("projects/show");
+	});
 	
 	router.post("/project", (req, res) => {
 		var newProject = utilities.assembleProject(req);

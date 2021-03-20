@@ -59,14 +59,16 @@ mongoose.set('useFindAndModify', false);
 //Handling routs
 //route file locations
 var authenticationRouts = require("./routs/authentication"),
-	indexRouts = require("./routs/index");
+	indexRouts = require("./routs/index"),
+	searchRouts = require('./routs/search');
 //using routs files
 app.use(authenticationRouts);
 app.use(indexRouts);
+app.use('/search', searchRouts);
 
 //app setings
 app.set("view engine", "ejs");
 
 app.listen(process.env.PORT || 3000, process.env.IP, () => {
-	console.log("Server has started!");
+	console.log("Server has started on port " + process.env.PORT || 3000 + " !");
 });

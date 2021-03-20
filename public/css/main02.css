@@ -295,7 +295,7 @@ body{
 .see-all-skills{
     margin-top: 1.5rem;
     border: 0.05rem solid lightgray;
-    border-radius: 10%;
+    border-radius: 15px;
     background-color: #EFF6FB;
     padding: 0.5rem;
     margin-left: auto;
@@ -369,6 +369,10 @@ body{
 .linkify{
     color:  #0099ff !important;
 }
+.linkify:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
 .visit-project{
     width: 50%;
 }
@@ -390,7 +394,7 @@ body{
 .see-all-projects{
     margin-top: 1.5rem;
     border: 0.05rem solid lightgray;
-    border-radius: 10%;
+    border-radius: 15px;
     background-color: #EFF6FB;
     padding: 0.5rem;
     width: 10rem;
@@ -446,7 +450,7 @@ textarea.contact-text{
     border: 0.05rem solid lightgray;
     background-color: #EFF6FB;
     width: 20%;
-    border-radius: 10%;
+    border-radius: 15px;
     outline: none;
     outline-style: none;
 }
@@ -492,6 +496,101 @@ textarea.contact-text{
 .make-white{
 	color: white;
 }
+.align-left{
+    text-align: left;
+}
+.d-none{
+    display: none;
+}
+
+/* Project page specific */
+.extra-project-page-conter-style{
+    height: 100%;
+}
+.top-project-row{
+    max-width: 100vw;
+}
+.project-page-img{
+    max-width: 100%;
+}
+.porject-info-col{
+    display: flex;
+    flex-direction: column;
+}
+.project-page-desciption{
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    border: 0.05rem solid lightgray;
+    font-size: 0.6rem;
+    letter-spacing: 0.3rem;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
+.project-page-action-buttons-container{
+    width: 100%;
+    display: flex;
+}
+.project-action-button{
+    
+}
+.project-page-skills-involved-container{
+    display: flex;
+    flex-direction: column;
+}
+.project-page-skills-involved-header{
+    font-size: 1.5rem;
+    margin-left: -15px;
+}
+.project-page-skills-col{
+
+}
+.project-page-skills-ul{
+    padding: 0;
+    list-style: none;
+}
+
+/* Search page specific stles */
+.search-page-box-container{
+    display: flex;
+    width: 100%;
+}
+.search-page-box{
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    border: 0.05rem solid lightgray;
+    display: flex;
+}
+.search-page-box-inner-container{
+    width: 100%;
+    display: flex;
+}
+.search-page-search-button{
+    margin: 0.5rem;
+    padding-left: 0;
+    outline: none;
+    border: none;
+}
+.search-page-search-icon{
+    font-size: 1.5rem;
+}
+.search-page-input{
+    width: 100%;
+    background-color: transparent;
+    height: 100%;
+    border: none;
+    outline: none;
+    margin-right: 1rem;
+}
+.search-page-results-text-container{
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+.search-page-results-text{
+}
+
 @media only screen and (max-width: 1550px) {
     .section-container{
         margin-left: 3rem;
@@ -602,6 +701,27 @@ textarea.contact-text{
 	.form-input-ele{
 		font-size: 0.5rem;
 	}
+    .project-page-skills-involved-row{
+        margin: unset;
+    }
+    .project-page-skills-involved-header{
+        margin-left: unset;
+    }
+    .project-page-skill-item-li{
+        font-size: 0.6rem;
+    }
+    .extra-project-page-conter-style{
+        height: 93vh !important;
+        padding-top: 2rem;
+    }
+    .project-page-skills-involved-container{
+        margin-top: 2rem;
+    }
+}
+@media only screen and (max-width: 374px) {
+    .extra-project-page-conter-style{
+        height: auto !important;
+    }
 }
 @media only screen and (max-width: 375px) {
 	.banner-img{
