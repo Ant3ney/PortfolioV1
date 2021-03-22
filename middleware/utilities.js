@@ -11,6 +11,7 @@ middle.tempLog = (msg) => {
 //create new project object
 middle.assembleProject = (req) => {
 	var body = req.body;
+	console.log(body['skill-ele-0']);
 	
 	var visitableProject = "false";
 	var visitableScorce = "false";
@@ -29,25 +30,35 @@ middle.assembleProject = (req) => {
 		hasVisit: visitableProject,
 		visit: body.visitUrl,
 		hasGitHub: visitableScorce,
-		github: body.githubUrl
+		github: body.githubUrl,
+		skill: middle.createSkillArray(req)
 	}
 	
+	console.log(projectObj);
+
 	return projectObj;
+}
+
+middle.createSkillArray = req => {
+	let body = req.body;
+	let skills = [];
+	let i = 0;
+
+	while(req.body[("skill-ele-" + i)]){
+		skills.push((body[("skill-ele-" + i)]).toString());
+
+		i++;
+	}
+
+	return skills;
 }
 
 //create new skill catetegory object
 middle.assembleSkillCat = (req) => {
 	var body = req.body;
 	var skillCat;
-	var skills = [];
+	var skills = middle.createSkillArray(req);
 	var skillTitle = body["category-ele"];
-	var i = 0;
-	
-	while(req.body[("skill-ele-" + i)]){
-		skills.push((body[("skill-ele-" + i)]).toString());
-
-		i++;
-	}
 	
 	skillCat = {
 		category: skillTitle,

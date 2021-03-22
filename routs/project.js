@@ -1,6 +1,8 @@
 //project routs
+const { json } = require("body-parser");
 var utilities = require("../middleware/utilities");
 var Project = require("../models/project");
+const dbUtil = require('../utilities/database');
 
 module.exports = (router) => {
 	router.get("/project/new", (req, res) => {
@@ -10,7 +12,19 @@ module.exports = (router) => {
 	//show project of id
 	router.get("/project/:id", (req, res) => {
 		var id = req.params.id;
-		res.render("projects/show");
+		dbUtil.getProjectViaId(id)
+		.then(project => {
+			project = project.toObject();
+			project.skills = ['React', 'HTML', 'CSS', 'Javascript', 'NodeJS', 'AdobieXD', 'FetchAPI', 'Bootstrap', 'React-Contex', 'PassportJS', 'React', 'HTML', 'CSS', 'Javascript', 'NodeJS', 'AdobieXD', 'FetchAPI', 'Bootstrap', 'React-Contex', 'PassportJS'];
+			const project2 = JSON.stringify({ hello: 'pal' });
+			console.log(' ' + project2 + ' ');
+			res.render("projects/show", {project: project});
+		})
+		.catch(err => {
+			console.error('An error happeoned in getProjectViaId because ' + err.message);
+			res.send("An error has happeoned");
+		});
+		
 	});
 	
 	router.post("/project", (req, res) => {

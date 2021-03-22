@@ -8,7 +8,8 @@ var projectSchema = new mongoose.Schema({
 	hasVisit: String,
 	visit: String,
 	hasGitHub: String,
-	github: String
+	github: String,
+	skill: [String]
 });
 
 module.exports = mongoose.model("Project", projectSchema);

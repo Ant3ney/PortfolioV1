@@ -493,6 +493,7 @@ textarea.contact-text{
 	margin-right: auto;
 	padding: .5rem;
 }
+/* General CSS */
 .make-white{
 	color: white;
 }
@@ -501,6 +502,9 @@ textarea.contact-text{
 }
 .d-none{
     display: none;
+}
+.width-100{
+    width: 100%;
 }
 
 /* Project page specific */
@@ -530,9 +534,6 @@ textarea.contact-text{
 .project-page-action-buttons-container{
     width: 100%;
     display: flex;
-}
-.project-action-button{
-    
 }
 .project-page-skills-involved-container{
     display: flex;

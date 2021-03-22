@@ -5,7 +5,7 @@
 	<div class="section-bg">
 		<div class="section-container">
 			<h2 class="section-title special">
-				Edit Project	
+				Edit Project
 			</h2>
 			<form class="project-form project-form-js" action="/project/<%= project._id %>?_method=PUT" method="POST">
 				<input class="form-ele" type="text" name="imgUrl" placeholder="image url" value="<%= project.thumbnail %>">
@@ -29,18 +29,39 @@
 					<input class="my-auto checkbox-pro-option" type="checkbox" name="visitableScorce" <% if(project.hasGitHub === "true"){ %> checked='on' <% } %>>
 				</div>
 				<input class="form-ele mt-2" type="text" name="githubUrl" placeholder="Github url" value="<%= project.github %>">
-				<div class="d-flex">
-					<button class="form-ele styled-button mt-2" type="submit">
-						Update project
-					</button>
-					<button class="form-ele styled-button mt-2 delete-btn-js" type="submit">
-						Delete project
-					</button>
+				<label class="my-2 skill-label">
+					Skills
+				</label>
+				<div class="multi-skill-container mb-2">
+					<% project.skill.forEach((skill, i) => { %>
+						<div class="single-skill-container">
+							<input class="skill-ele form-ele skill-ele-0 mb-2" type="text" name="skill-ele-<%= i %>" placeholder="nodejs" value="<%= skill %>">
+							<span class="m-auto"></span><span class="icon-container del-icon-container"><i class="far fa-times-circle exit-icon skill-delete-icon"></i></span>
+						</div>
+					<% }); %>
+				</div>
+				<div class="row w-100 mt-2 mx-0">
+					<div class="col-md-4 d-flex">
+						<button id="add-skill" class="styled-button skill-action-btn p-3">
+							Add skill
+						</button>
+					</div>
+					<div class="col-md-4 d-flex">
+						<button class="styled-button skill-action-btn p-3" type="submit">
+							Submit
+						</button>
+					</div>
+					<div class="col-md-4 d-flex">
+						<button class="styled-button skill-action-btn delete-btn-js p-3" type="submit">
+							Delete project
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>	
 	</div>
 	
-<!-- Custum javascript -->
-<script src="/js/projectFunction.js"></script>
+	<!-- Custum javascript -->
+	<script src="/js/projectFunction.js"></script>
+	<script src="/js/skillFunction.js"></script>
 <%- include("../partials/altFooter") -%>

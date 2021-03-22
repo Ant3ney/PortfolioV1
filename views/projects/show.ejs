@@ -12,16 +12,19 @@
 </style>
 <div class="section-bg my-0 extra-project-page-conter-style">
     <div class="section-container">
-        <h2 class="section-title align-left mb-2 extra-project-page-section-title-style">24/7 Sale</h2>
+        <h2 class="section-title align-left mb-2 extra-project-page-section-title-style"><%= project.title %></h2>
         <div class='row top-project-row'>
             <div class='col-md-6 porject-info-col'>
-                <img class='project-page-img' src='https://serene-williams-bb8bee.netlify.app/images/247Sales/247SaleThumbnail.png'>
+                <img class='project-page-img' src='<%= project.thumbnail %>'>
                 <div class='project-page-desciption mt-3'>
-                    Singularity blog was designed with Adobe XD and follows the neuromorphic UI design trend.
+                    <%= project.description %>
                 </div>     
                 <div class='project-page-action-buttons-container mt-3'>
-                    <span class='project-page-visit-action-button mr-3'><a href='#' class='linkify project-action-button'>Visit</a><a href='#' class='linkify project-action-button'><i class="fas fa-external-link-alt"></i></a></span>
-                    <span class='project-page-github-action-button'><a href='#' class='linkify project-action-button'><i class="fab fa-github"></i></a></span>
+                    <% if(project.hasVisit === "true"){ %>
+                        <span class='project-page-visit-action-button mr-3'><a href='<%= project.visit %>' class='linkify project-action-button'>Visit</a><a href='<%= project.visit %>' target='_blank' class='linkify project-action-button'><i class="fas fa-external-link-alt"></i></a></span>
+                    <% } if(project.hasVisit === "false" || (project.hasVisit === "true" && project.hasGitHub === "true")){ %>
+                        <span class='project-page-github-action-button'><a href='<%= project.github %>' class='linkify project-action-button'><i class="fab fa-github"></i></a></span>
+                    <% } %>
                 </div>    
             </div>
             <div class='col-md-6 mb-0 project-page-skills-involved-container'>
@@ -44,8 +47,9 @@
 </div>
 <script>
     //#region skill items list
+        console.log(JSON.parse('<%- JSON.stringify(project) %>'));
         let projectPage = {};
-        projectPage.projectSkills = ['React', 'HTML', 'CSS', 'Javascript', 'NodeJS', 'AdobieXD', 'FetchAPI', 'Bootstrap', 'React-Contex', 'PassportJS', 'React', 'HTML', 'CSS', 'Javascript', 'NodeJS', 'AdobieXD', 'FetchAPI', 'Bootstrap', 'React-Contex', 'PassportJS'];
+        projectPage.projectSkills = JSON.parse('<%- JSON.stringify(project) %>').skill;
         projectPage.list1 = document.getElementsByClassName('project-page-skills-ul')[0];
         projectPage.list2 = document.getElementsByClassName('project-page-skills-ul')[1];
         projectPage.skillDisplayToggle = document.querySelector('.see-all-projects');
@@ -143,10 +147,19 @@
           }
           return array;
         }
+        projectPage.decideSeeMoreVisability = () => {
+            if(!projectPage.projectSkills || !projectPage.projectSkills.length < 11){
+                projectPage.hideEle(projectPage.skillDisplayToggle);
+            }
+        }
 
         //exicution
-        projectPage.setUpProjectSkillsWith(projectPage.projectSkills);
+        if(projectPage.projectSkills && projectPage.projectSkills.length > 0){
+            projectPage.setUpProjectSkillsWith(projectPage.projectSkills);
+        }
+        projectPage.decideSeeMoreVisability();
         projectPage.skillDisplayToggle.addEventListener('click', projectPage.toggleSeeFullSkills);
+
     //#endregion
 </script>
 <%- include('../partials/altFooter') -%>
