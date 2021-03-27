@@ -7,7 +7,6 @@ router.get('/', (req, res) => {
     let search = req.query.search;
     util.getProjectsThatMatchSearch(search)
     .then(projects => {
-        console.log(projects);
         res.render('search/index', {projects: projects, search: search});
     })
     .catch(err => {
