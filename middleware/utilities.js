@@ -2,6 +2,7 @@
 var middle = {};
 var express = require("express");
 var app = express();
+let Projects = require('../models/project');
 
 middle.tempLog = (msg) => {
 	console.log("-*Delete later*-");
@@ -45,7 +46,11 @@ middle.createSkillArray = req => {
 	let i = 0;
 
 	while(req.body[("skill-ele-" + i)]){
-		skills.push((body[("skill-ele-" + i)]).toString());
+		let skill = (body[("skill-ele-" + i)]).toString();
+		if (skill === ''){
+			continue;
+		}
+		skills.push(skill);
 
 		i++;
 	}
@@ -132,6 +137,44 @@ middle.assembleGithubUser = function(profile, type){
 	};
 		
 	return user
+}
+
+middle.cleanSearch = search => {
+	if(search.length <= 2){
+		return search;
+	}
+	let retSearch = search.toLowerCase();
+	let lastTwoIndexes = retSearch.slice((retSearch.length - 2));
+	if(lastTwoIndexes === 'js' || lastTwoIndexes === 'db'){
+		retSearch = retSearch.slice(0, (retSearch.length - 2));
+	}
+	return retSearch;
+}
+middle.getProjectsThatMatchSearch = searchRaw => {
+	let search = middle.cleanSearch(searchRaw);
+	return new Promise((resolve, reject) => {
+		Projects.find({}, (err, projects) => {
+			if(err){
+				reject({msg: 'Error in middle utils getProjects of search project.find because ' + err.message});
+			}
+			if(projects.length <= 0){
+				reject({message: 'No projects saved in databace'});
+			}
+			let matchedProjects = [];
+			projects.forEach(project => {
+				let projectObj = project.toObject();
+				for(let i = 0; i < project.skill.length; i++){
+					let skill = middle.cleanSearch(project.skill[i]);
+					//console.log(`Comparing ${search} to ${skill}`);
+					if(search === skill){
+						matchedProjects.push(projectObj);
+						break;
+					}
+				}
+			});
+			resolve(matchedProjects);
+		});
+	});
 }
 
 module.exports = middle;

@@ -16,13 +16,13 @@
             <div class='search-page-box'>
                 <form class='search-page-box-inner-container'>
                     <button type='submit' class='search-page-search-button' href='#'><i class="fas fa-search search-page-search-icon"></i></button>
-                    <input name='search' class='search-page-input' value='react'/>
+                    <input name='search' class='search-page-input' value='<%= search %>'/>
                 </form>
             </div>
         </div>
         <div class='search-page-results-text-container'>
             <p class='search-page-results-text'>
-                3 projects that involve "react"
+                <%= projects.length %> projects that involve "<%= search %>"
             </p>
         </div>
         <div class='row all-projects-container'>
