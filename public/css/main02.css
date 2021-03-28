@@ -265,6 +265,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    flex-direction: row;
 }
 .section-title{
     font-family: 'Titillium Web', sans-serif;
@@ -756,6 +757,24 @@ textarea.contact-text{
 	.form-input-ele{
 		font-size: 0.5rem;
 	}
+    .see-search-input-icon{
+        font-size: 2rem;
+        
+    }
+    .see-search-input-button{
+        margin-bottom: 1rem;
+    }
+    .extra-project-title-style{
+        margin-bottom: 1rem;
+    }
+    .project-search-description{
+        font-size: 0.75rem;
+        margin-left: 0rem;
+    }
+    .section-project-title-container{
+        margin-bottom: 2rem;
+        flex-direction: column;
+    }
     .project-page-skills-involved-row{
         margin: unset;
     }
