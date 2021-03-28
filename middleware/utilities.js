@@ -141,6 +141,9 @@ middle.assembleGithubUser = function(profile, type){
 
 middle.cleanSearch = search => {
 	if(!search || search.length <= 2){
+		if(!search){
+			return search;
+		}
 		return search.toLowerCase();
 	}
 	let retSearch = search.toLowerCase();
@@ -165,7 +168,7 @@ middle.getProjectsThatMatchSearch = searchRaw => {
 				let projectObj = project.toObject();
 				for(let i = 0; i < project.skill.length; i++){
 					let skill = middle.cleanSearch(project.skill[i]);
-					console.log(`Comparing ${search} to ${skill}`);
+					//console.log(`Comparing ${search} to ${skill}`);
 					if(search === skill){
 						matchedProjects.push(projectObj);
 						break;

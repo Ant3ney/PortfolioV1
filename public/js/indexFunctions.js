@@ -199,3 +199,45 @@ if(proBtn){
 		}
 	});
 }
+
+//Index search button functionality
+indexSearch = {};
+indexSearch.sectionTitle = document.getElementById('project-section-title');
+indexSearch.searchButton = document.getElementById('project-section-see-search');
+indexSearch.description = document.getElementById('project-section-search-description');
+indexSearch.searchInput = document.getElementById('search-form-input');
+indexSearch.buttonFunctionality = 'show search';
+indexSearch.form = document.getElementById('search-form-tag');
+indexSearch.onSearchPressed = (e) => {
+	if(indexSearch.buttonFunctionality === 'show search'){
+		e.preventDefault();
+		indexSearch.form.setAttribute('action', `/search?search=test`);
+		indexSearch.pressedSeeSearchInput();
+		indexSearch.buttonFunctionality = 'make search';
+	}
+	else if(indexSearch.buttonFunctionality === 'make search'){
+		indexSearch.makeSearch(e);
+	}
+}
+indexSearch.pressedSeeSearchInput = () => {
+	hideEle(indexSearch.sectionTitle);
+	hideEle(indexSearch.description);
+	showEle(indexSearch.searchInput);
+}
+indexSearch.makeSearch = (e) => {
+	e.preventDefault();
+	let input = indexSearch.searchInput;
+    let search = input.value;
+	indexSearch.form.setAttribute('action', `/search?search=${search}`);
+    e.target.submit();
+}
+
+//overall helper functions
+showEle = (ele) => {
+	while(ele.classList.contains('d-none')){
+		ele.classList.remove('d-none');
+	}
+}
+hideEle = (ele) => {
+	ele.classList.add('d-none');
+}

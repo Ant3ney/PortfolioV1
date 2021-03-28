@@ -122,7 +122,14 @@
 <!-- Projects -->
 <div class="section-bg">
   <div class="section-container">
-	<h2 class="section-title">Projects</h2>
+	<div class='section-project-title-container'>
+		<h2 class="section-title" id='project-section-title'>Projects</h2>
+		<form class='d-flex' id='search-form-tag' onsubmit='indexSearch.onSearchPressed(event)'>
+			<button class='see-search-input-button' id='project-section-see-search'"><i class="fas fa-search see-search-input-icon"></i></button>
+			<p class='project-search-description' id='project-section-search-description'>Search for projects via desired skills</p>
+			<input id='search-form-input' name='search' class='project-search-input d-none'/>
+		</form>
+	</div>
 
 	<div class="row all-projects-container">
 
@@ -221,4 +228,5 @@
   </div>
 </div>
 
+<!-- Custum Javascript -->
 <%- include("partials/footer") -%>
