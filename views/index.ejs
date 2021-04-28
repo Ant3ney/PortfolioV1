@@ -75,6 +75,8 @@
 	</div>
 </div>
 
+<div class='landing-background'></div>
+
 <!-- Banner -->
 <div class="banner-bg">
 	<h1>Full Stack</h1>
@@ -232,4 +234,10 @@
 </div>
 
 <!-- Custum Javascript -->
+<script src="nebulaMaker/three.min.js"></script>
+<script src="nebulaMaker/postprocessing.min.js"></script>
+<script src="nebulaMaker/index.js"></script>
+<script>
+    init(document.querySelector('.landing-background'));
+</script>
 <%- include("partials/footer") -%>

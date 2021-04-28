@@ -26,7 +26,17 @@ let scene, camera, cloudParticles = [],composer;
         directionalLight.position.set(0,0,1);
         scene.add(directionalLight);
 
-        let orangeLight = new THREE.PointLight(0xcc6600,50,450,1.7);
+        let orangeLight = new THREE.PointLight(0xb56711,50,450,1.7);
+        orangeLight.position.set(-300,500, 000);
+        scene.add(orangeLight);
+        let redLight = new THREE.PointLight(0xd8547e,50,450,1.7);
+        redLight.position.set(-100,500, 000);
+        scene.add(redLight);
+        let blueLight = new THREE.PointLight(0x3677ac,50,450,1.7);
+        blueLight.position.set(-200,500, 000);
+        scene.add(blueLight);
+
+        /* let orangeLight = new THREE.PointLight(0xcc6600,50,450,1.7);
         orangeLight.position.set(200,300,100);
         scene.add(orangeLight);
         let redLight = new THREE.PointLight(0xd8547e,50,450,1.7);
@@ -34,12 +44,14 @@ let scene, camera, cloudParticles = [],composer;
         scene.add(redLight);
         let blueLight = new THREE.PointLight(0x3677ac,50,450,1.7);
         blueLight.position.set(300,300,200);
-        scene.add(blueLight);
+        scene.add(blueLight);*/
 
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(width, height);
-        scene.fog = new THREE.FogExp2(0x03544e, 0.001);
+        scene.fog = new THREE.FogExp2(0x172A21, 0.001);
         renderer.setClearColor(scene.fog.color);
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.zIndex = -1;
         ele.appendChild(renderer.domElement);
 
         let loader = new THREE.TextureLoader();
@@ -98,8 +110,8 @@ let scene, camera, cloudParticles = [],composer;
         });
       }
       function onWindowResize() {
-        let width = window.recs.width < window.innerWidth ? window.recs.width : window.innerWidth;
-        let height = window.recs.width < window.innerWidth ? window.recs.height : window.innerHeight * 0.9;
+        let width = window.innerWidth - 17;
+        let height = window.innerHeight;
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
