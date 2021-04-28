@@ -247,6 +247,7 @@ body{
     top: -6rem;
     text-align: center;
 	height: 100%;
+    text-shadow: 2px 2px 3px rgb(30 30 30);
 }
 .section-bg{
     padding-top: 3rem;
