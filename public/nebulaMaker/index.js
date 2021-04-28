@@ -110,7 +110,7 @@ let scene, camera, cloudParticles = [],composer;
         });
       }
       function onWindowResize() {
-        let width = window.innerWidth - 17;
+        let width = window.innerWidth;
         let height = window.innerHeight;
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
