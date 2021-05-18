@@ -1,0 +1,22 @@
+<div id='experience-details-list'>
+    <div class="multi-list-container">
+        <% if(settings.type === 'editExperience' && experience.details){experience.details.forEach((detail, i) => { %>
+            <div class="single-list-container">
+                <input class="list-ele form-ele list-ele-<%= i %> mb-2" type="text" name="experience-details-list-ele-<%= i %>" placeholder="Optimised plugins to run faster and work as intended" value='<%= detail %>'>
+                <span class="m-auto"></span><span class="icon-container del-icon-container"><i class="far fa-times-circle exit-icon list-delete-icon"></i></span>
+            </div>
+        <% })}else{ %> 
+            <div class="single-list-container">
+                <input class="list-ele form-ele list-ele-0 mb-2" type="text" name="experience-details-list-ele-0" placeholder="nodejs">
+                <span class="m-auto"></span><span class="icon-container del-icon-container"><i class="far fa-times-circle exit-icon list-delete-icon"></i></span>
+            </div>
+        <%} %>
+    </div>
+    <div class="row">
+        <div class="col-md-6 d-flex">
+            <button class="add-list styled-button skill-action-btn">
+                Add detail
+            </button>
+        </div>
+    </div>
+</div>

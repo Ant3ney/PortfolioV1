@@ -16,7 +16,10 @@
 	  
 	  <!-- Custum css -->
 	  <link rel="stylesheet" type="text/css" href="/css/main02.css">
-	
+	  <link rel='stylesheet' href='/css/experience.css'>
+
+	  <!-- Custum javascipt -->
+	  <script src="/js/utilities.js"></script>
    <title>Anthony Full Stack</title>
 </head>
 <body>
@@ -53,14 +56,14 @@
 			  
 			  <% if(!currentUser){ %>
 				<li class="nav-item snap-right-sm nav-login <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> navele-margin-right <% } %>">
-					<a class="nav-link">Login</a>
+					<a class="nav-link" href='#'>Login</a>
 				  </li>
 				  <li class="nav-item navele-margin-right snap-right-sm nav-register">
-					<a class="nav-link">Sign up</a>
+					<a class="nav-link" href='#'>Sign up</a>
 				  </li>
 			  <% } else{ %>
 				  <li class="ex-sm-mar nav-item navele-margin-right snap-right-sm nav-logout <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %> navele-margin-right ex-sm-mar<% } %>">
-					<a class="nav-link" href="/logout">Sign out</a>
+					<a class="nav-link" href="/logout" href='#'>Sign out</a>
 				  </li>
 			  <% } %>
           </ul>

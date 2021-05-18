@@ -1,0 +1,44 @@
+<div id='experience-body' class="section-bg">
+    <div class="section-container">
+        <h2 class="section-title">Experience</h2>
+        <% experiences.forEach((experience, i) => { %>
+            <div class='row single-container <%= (i !== 0) ? "mt-5" : "" %> <%= (i < 2) || (settings.startShowingAll) ? "" : "d-none"  %>'>
+                <div class='col-lg-4 image-container'>
+                    <div class='thumbnail-container'>
+                        <img src="<%= experience.thumbnail %>" class="thumbnail">
+                    </div>
+                </div>
+                <div class='col-lg-8 d-flex single-content-bg text-content'>
+                    <div class='row lists'>
+                        <div class='col-12 col-lg-6 details'>
+                            <a href='<%= experience.visit %>'><h4 class='title'><%= experience.conpanyName %></h4></a>
+                            <header><%= experience.jobTitle %></header>
+                            <ul>
+                                <% for(let i = 0; i < (settings.showAllDetails ? experience.details.length : 3); i++){ %>
+                                    <li>
+                                        <%= experience.details[i] %>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <div class='col-12 col-lg-6 skills'>
+                            <header>Skills involved</header>
+                            <ul>
+                                <% for(let i = 0; i < experience.skill.length &&  i < 10; i++){ %> 
+                                    <li>
+                                        <a href='#'><%= experience.skill[i] %></a>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='project-action-buttons-container d-flex'>
+                        <a href='/experience/<%= experience._id %>' class='linkify action-button mr-auto'>Learn More</a>
+                        <a href="/experience/<%= experience._id%>/edit" class="styled-button edit-project-edit-btn mx-auto mt-0">Edit</a>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+        <button class="see-all <%= experiences.length > 2 ? '' : 'd-none' %>">See all</button>
+    </div>
+</div>

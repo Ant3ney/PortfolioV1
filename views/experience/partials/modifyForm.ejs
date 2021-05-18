@@ -1,0 +1,66 @@
+<h2><%= (settings && settings.title) ? settings.title : 'Add experience'%></h2>
+
+<form id='modify-form' class="project-form" action="/experience<%= settings.type === 'editExperience' ? ('/' + experience._id + '?_method=PUT') : '' %>" method="POST">
+    <input class="form-ele mt-2" type="text" name="conpanyName" placeholder="Company name" value="<%=settings.type === 'editExperience'  ? experience.conpanyName : ''%>">
+    <input class="form-ele mt-2" type="text" name="jobTitle" placeholder="Job title" value="<%=settings.type === 'editExperience' ? experience.jobTitle : ''%>">
+    <textarea class="form-ele mt-2" name="description" placeholder="Experience description"><%=settings.type === 'editExperience' ? experience.description : ''%></textarea>
+    <input class="form-ele my-2" type="text" name="imgUrl" placeholder="image url" value="<%= settings.type === 'editExperience' ? experience.thumbnail : '' %>">
+    <%- include('./detailsForm.ejs') -%>
+    <div class="form-ele mt-2 d-flex">
+        <div class="text-container p-0">
+            <p class="mb-0 mr-5 my-auto">
+                Has visit link
+            </p>
+        </div>
+        <input class="my-auto checkbox-pro-option" type="checkbox" name="visitableProject" <% if(settings.type === 'editExperience' && experience.hasVisit === "true"){ %> checked='on' <% } %>>
+    </div>
+    <input class="form-ele mt-2" type="text" name="visitUrl" placeholder="url" value='<%= (settings.type === "editExperience" && experience.visit) ? experience.visit : ""%>'>
+    <div class="form-ele mt-2 d-flex">
+        <div class="text-container p-0">
+            <p class="mb-0 mr-5 my-auto">
+                Has Github?
+            </p>
+        </div>
+        <input class="my-auto checkbox-pro-option" type="checkbox" name="visitableScorce"  <% if(settings.type === 'editExperience' && experience.hasGitHub === "true"){ %> checked='on' <% } %>>
+    </div>
+    <input class="form-ele mt-2" type="text" name="githubUrl" placeholder="Github url" value='<%= (settings.type === "editExperience" && experience.github) ? experience.github : ""%>'>
+    <label class="my-2 skill-label">
+        Skills
+    </label>
+    <div id='skill-list'>
+        <div class="multi-list-container mb-2">
+            <% if(settings.type === 'editExperience' && experience.skill.length > 0){ experience.skill.forEach((skill, i) => { %> 
+                <div class="single-list-container">
+                    <input class="list-ele form-ele list-ele-<%= i %> mb-2" type="text" name="skill-list-ele-<%= i %>" placeholder="nodejs" value='<%= skill %>'>
+                    <span class="m-auto"></span><span class="icon-container del-icon-container"><i class="far fa-times-circle exit-icon list-delete-icon"></i></span>
+                </div>
+            <% })}else{ %>
+                <div class="single-list-container">
+                    <input class="list-ele form-ele list-ele-0 mb-2" type="text" name="skill-list-ele-0" placeholder="nodejs">
+                    <span class="m-auto"></span><span class="icon-container del-icon-container"><i class="far fa-times-circle exit-icon list-delete-icon"></i></span>
+                </div>
+            <% } %>
+        </div>
+        <div class="row">
+            <div class="col-md-<%= settings.type === 'editExperience' ? '4' : '6' %> d-flex">
+                <button class="add-list styled-button skill-action-btn">
+                    Add skill
+                </button>
+            </div>
+            <div class="col-md-<%= settings.type === 'editExperience' ? '4' : '6' %> d-flex">
+                <button class="styled-button skill-action-btn" type="submit">
+                    Submit
+                </button>
+            </div>
+            <% if(settings.type === 'editExperience'){ %>
+                <div class="col-md-4 d-flex">
+                    <button class="styled-button skill-action-btn delete-btn-js" type="submit">
+                        Delete Experience
+                    </button>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</form>
+
+<script src="/js/List.js"></script>

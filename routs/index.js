@@ -5,6 +5,7 @@ var skillsRoute = require("./skill");
 var projectsRoute = require("./project");
 var SkillCat = require("../models/skillCat");
 var Project = require("../models/project");
+const Experience = require('../models/experience');
 const sendmail = require('sendmail')();
 
 //Adding routs
@@ -14,23 +15,21 @@ projectsRoute(router);
 //Show landing page
 router.get("/", (req, res) => {
 	
-	//Add skills to index locals
-	SkillCat.find({}, (err, skillCat) => {
-		if(err){
-			console.log("Something went wrong");
-			console.log(err.message);
-		}
-		else{
-			Project.find({}, (err, projects) => {
-				if(err){
-					console.log("Something went wrong");
-					console.log(err.message);
-				}
-				else{
-					res.render("index", {skillCats: skillCat, projects: projects});
-				}
-			});
-		}
+	Promise.all([
+		SkillCat.find({}),
+		Project.find({}),
+		Experience.find({})
+	])
+	.then(dbEntries => {
+		let skillCat = dbEntries[0];
+		let projects = dbEntries[1];
+		let experiences = dbEntries[2];
+		res.render("index", {skillCats: skillCat, projects: projects, experiences: experiences, settings: {
+			startShowingAll: false
+		}});
+	})
+	.catch(err => {
+		res.status(500).send(`failed to load index page becaiuse ${err.message}`);
 	});
 });
 

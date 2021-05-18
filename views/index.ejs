@@ -136,13 +136,13 @@
 		<p class='project-search-description' id='project-section-search-description'>Search for projects via desired skills</p>
 	</div>
 
-	<div class="row all-projects-container">
+	<div id='projects-container' class="row all-projects-container">
 
 	  <!-- Project -->
 		<% projects.forEach((project, i) => { %> 
 		  <div class="col-xl-4 col-md-6 project-col-container <% if(i == 1){ %> project-col-2 <% }else if(i == 2){ %> lower-project-3 <% }else if(i > 2){ %> lower-project-3 lower-project-below-4 d-none <% } %>">
 			<div class="project-container">
-			  <img src="<%= project.thumbnail %>" class="project-thumbnail">
+			  <img src="<%= project.thumbnail %>" class="thumbnail">
 			  <div class="text-container">
 				<h4 class="project-title"><%= project.title %></h4>
 				<p class="project-description">
@@ -177,6 +177,9 @@
 	  <% } %>
   </div>
 </div>
+
+<!-- Experience -->
+<%- include('./experience/partials/body.ejs') -%>
 
 <!-- About me -->
 <div class="section-bg-green">

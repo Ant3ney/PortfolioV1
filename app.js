@@ -60,11 +60,13 @@ mongoose.set('useFindAndModify', false);
 //route file locations
 var authenticationRouts = require("./routs/authentication"),
 	indexRouts = require("./routs/index"),
-	searchRouts = require('./routs/search');
+	searchRouts = require('./routs/search'),
+	experienceRouts = require('./routs/experience');
 //using routs files
 app.use(authenticationRouts);
 app.use(indexRouts);
 app.use('/search', searchRouts);
+app.use('/experience', experienceRouts);
 
 //app setings
 app.set("view engine", "ejs");

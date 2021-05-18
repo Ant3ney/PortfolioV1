@@ -40,6 +40,49 @@ middle.assembleProject = (req) => {
 	return projectObj;
 }
 
+middle.assembleExperience = req => {
+	let body = req.body;
+	var visitableProject = "false";
+	var visitableScorce = "false";
+	if(body.visitableProject === "on"){
+		visitableProject = "true";
+	}
+	if(body.visitableScorce === "on"){
+		visitableScorce = "true";
+	}
+
+	return({
+		thumbnail: body.imgUrl,
+		conpanyName: body.conpanyName,
+		jobTitle: body.jobTitle,
+		description: body.description,
+		details: middle.createArrayOf(req, 'experience-details-list'),
+		hasVisit: visitableProject,
+		visit: body.visitUrl,
+		hasGitHub: visitableScorce,
+		github: body.githubUrl,
+		skill: middle.createArrayOf(req, 'skill-list')
+	});
+};
+
+middle.createArrayOf = (req, type) => {
+	let body = req.body;
+	let typedArray = [];
+	let i = 0;
+
+	while(req.body[`${type}-ele-${i}`]){
+		let item = body[`${type}-ele-${i}`].toString();
+		if (item === ''){
+			continue;
+		}
+		typedArray.push(item);
+
+		i++;
+	}
+
+	return typedArray;
+}
+
 middle.createSkillArray = req => {
 	let body = req.body;
 	let skills = [];

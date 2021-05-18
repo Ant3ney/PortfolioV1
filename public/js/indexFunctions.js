@@ -231,13 +231,3 @@ indexSearch.makeSearch = (e) => {
 	indexSearch.form.setAttribute('action', `/search?search=${search}`);
     e.target.submit();
 }
-
-//overall helper functions
-showEle = (ele) => {
-	while(ele.classList.contains('d-none')){
-		ele.classList.remove('d-none');
-	}
-}
-hideEle = (ele) => {
-	ele.classList.add('d-none');
-}
