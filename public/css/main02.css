@@ -747,7 +747,9 @@ textarea.contact-text{
 .search-form{
     flex-wrap: wrap;
 }
-
+.d-dir-col{
+    flex-direction: column;
+}
 @media only screen and (max-width: 1550px) {
     .section-container{
         margin-left: 3rem;
