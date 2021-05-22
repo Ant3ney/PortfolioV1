@@ -716,6 +716,10 @@ textarea.contact-text{
 .edit-btn:hover{
 	text-decoration: none;
 }
+.mx-3-5{
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
+}
 
 @media only screen and (max-width: 1550px) {
     .section-container{

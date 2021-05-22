@@ -16,7 +16,7 @@ router.get('/:id', (req, res) => {
 
     Experience.findById(id)
     .then(experience => {
-        res.render('experience/show', experience);
+        res.render('experience/show', {experience: experience});
     });
 });
 
@@ -24,7 +24,6 @@ router.get('/:id/edit', (req, res) => {
     let id = req.params.id;
     Experience.findById(id)
     .then(experience => {
-        console.log(experience);
         res.status(200).render('experience/new', {experience: experience, settings: {
             title: 'Edit  experience',
             type: 'editExperience'
@@ -180,7 +179,6 @@ router.get('/postNewViaGet', (req, res)=> {
 });
 
 router.post('/', (req, res) => {
-    console.log('In post');
     let newExperience = utilities.assembleExperience(req);
     Experience.create(newExperience, (err, experience) => {
         if(err){

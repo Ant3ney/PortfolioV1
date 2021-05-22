@@ -43,13 +43,14 @@
           <ul class="navbar-nav">
 			  
 			  	<% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %>
-			  	 <li class="nav-item dropdown snap-right-sm nav-ass-skill dropdown-container">
+			  	 <li class="nav-item dropdown snap-right-sm nav-ass-skill dropdown-container mr-sm-5">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					  Add
 					</a>
 					<div class="dropdown-menu nav-item snap-right-sm nav-ass-skill dropdown-container-menu" aria-labelledby="navbarDropdown">
 					  	<a href="/skill/new" class="nav-link dropdown-item">Skill</a>
 						<a href="/project/new" class="nav-link dropdown-item">Project</a>
+						<a href='/experience/new' class='nav-link dropdown-item'>Experience</a>
 					</div>
 				  </li>
 			  	<% } %>

@@ -41,7 +41,7 @@ router.post("/contactMe", (req, res) => {
 			subject: 'JOB OPPORTUNITY LOOK HERE',
 			html: message,
 		  	}, function(err, reply) {
-				console.log(err && err.stack);
+				console.error(err && err.stack);
 				console.dir(reply);
 		 		res.redirect("/");
 		});

@@ -83,6 +83,11 @@
     margin-top: 0rem;
 }
 
+#experience-show-container{
+    margin-top: 0rem;
+    letter-spacing: 0.25rem !important;
+}
+
 #experience-show-container .thumbnail{
     max-width: 100%;
     border-radius: 15px;
@@ -94,10 +99,36 @@
     flex-direction: column;
 }
 
-#experience-show-container h3{
-    
+#experience-show-container .description{
+    padding: 2rem;
+    background-color: white;
+    border-radius: 15px;
 }
 
+#experience-show-container ul{
+    list-style-type: "-";
+}
+
+#experience-show-container .skills{
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+#experience-show-container li{
+    margin-top: 1.5rem;
+}
+
+#experience-show-container .first-li{
+    margin-top: 0rem;
+}
+
+#experience-show-container h3{
+    margin-bottom: 0rem;
+}
+#experience-show-container ul{
+    margin-bottom: 0rem;
+}
 /* Breakpoints */
 @media (max-width: 1199.98px) { 
     #experience-body .thumbnail{
@@ -119,10 +150,26 @@
         -webkit-columns: 2;
         -moz-columns: 2;
     }
+    #experience-show-container h3{
+        font-size: 1.5rem;
+    }
+    #experience-show-container .skills{
+        columns: 1;
+        -webkit-columns: 1;
+        -moz-columns: 1;
+    }
 }
 
 @media (max-width: 767.98px) { 
-    
+    #experience-show-container .skills{
+        columns: 2;
+        -webkit-columns: 2;
+        -moz-columns: 2;
+    }
+
+    #experience-show-container li{
+        
+    }
 }
 
 @media (max-width: 575.98px) { 
@@ -160,6 +207,18 @@
     }
     #experience-body ul li:nth-of-type(1){
         margin-top: 0rem;
+    }
+    #experience-show-container .skills{
+        columns: 1;
+        -webkit-columns: 1;
+        -moz-columns: 1;
+    }
+    #experience-show-container .section-container{
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+    }
+    #experience-show-container{
+        letter-spacing: 0.012rem !important;
     }
 }
 

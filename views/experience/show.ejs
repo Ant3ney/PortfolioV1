@@ -2,17 +2,29 @@
 <link rel='stylesheet' href='/css/experience.css'>
 
 <div id='experience-show-container' class="section-bg">
-    <div class="section-container">
-        <div class='row'>
-            <h2 class="section-title align-left mb-2 extra-project-page-section-title-style"><a href='#'>Senpa.io</a></h2>
+    <div class="section-container mx-3-5">
+        <div class='row mx-0'>
+            <h2 class="section-title align-left mb-2 extra-project-page-section-title-style"><a href='<%= experience.hasVisit ? experience.visit  : ""%>'><%= experience.conpanyName %></a></h2>
         </div>
-        <div class="row">
-            <div class="col-lg-6 left-col">
-                    <img src="https://serene-williams-bb8bee.netlify.app/images/Portfolieo/Senpa.jpg" class="thumbnail">
-                    <h3 class='mt-2'>React / Webpack Developer</h3>
+        <div class="row mt-4 mx-0">
+            <div class="col-md-6 left-col">
+                    <img src="<%= experience.thumbnail %>" class="thumbnail">
+                    <h3 class='mt-4 mb-0'><%= experience.jobTitle %></h3>
+                    <p class="description mt-4 mb-0">&nbsp&nbsp&nbsp&nbsp&nbsp<%= experience.description %></p>
             </div>
-            <div class="col-lg-6">
-                
+            <div class="col-md-6">
+                <h3 class='mb-0 mt-4 mt-md-0'>My acomplishments</h3>
+                <ul class='mt-4'>
+                    <% experience.details.forEach((detail, i) => { %>
+                        <li class='<%= i === 0 ? "first-li" : "" %>'><%= detail %></li>
+                    <% }) %>
+                </ul>
+                <h3 class='mt-4'>Skills involved</h3>
+                <ul class='skills mt-4'>
+                    <% experience.skill.forEach((skill, i) => { %>
+                        <li class='<%= i === 0 ? "first-li" : "" %>'><a href='#'><%= skill %></a></li>
+                    <% }) %>
+                </ul>
             </div>
         </div>
     </div>

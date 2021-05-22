@@ -34,7 +34,9 @@
                     </div>
                     <div class='project-action-buttons-container d-flex'>
                         <a href='/experience/<%= experience._id %>' class='linkify action-button mr-auto'>Learn More</a>
+                        <% if(currentUser && (currentUser.admin === "owner" || currentUser.admin === "admin")){ %>
                         <a href="/experience/<%= experience._id%>/edit" class="styled-button edit-project-edit-btn mx-auto mt-0">Edit</a>
+                        <% } %>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,6 @@ module.exports = (router) => {
 			project = project.toObject();
 			project.skills = ['React', 'HTML', 'CSS', 'Javascript', 'NodeJS', 'AdobieXD', 'FetchAPI', 'Bootstrap', 'React-Contex', 'PassportJS', 'React', 'HTML', 'CSS', 'Javascript', 'NodeJS', 'AdobieXD', 'FetchAPI', 'Bootstrap', 'React-Contex', 'PassportJS'];
 			const project2 = JSON.stringify({ hello: 'pal' });
-			console.log(' ' + project2 + ' ');
 			res.render("projects/show", {project: project});
 		})
 		.catch(err => {
