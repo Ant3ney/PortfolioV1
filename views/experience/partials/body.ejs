@@ -1,8 +1,21 @@
 <div id='experience-body' class="section-bg">
     <div class="section-container">
-        <h2 class="section-title">Experience</h2>
+        <div class='section-project-title-container'>
+            <form class='d-flex search-form' id='experience-search-form-tag' onsubmit='onSearchPressed(event)' action='/test'>
+                <h2 class="section-title">Experience</h2>
+                <button class='see-search-input-button'>
+                    <i class="fas fa-search see-search-input-icon"></i>
+                </button>
+                <input name='skill' class='search-input-ele d-none search-form-input'/>
+                <input name='priority' class='d-none' value='experience'/>
+                <p class='search-description'>
+                    Search for projects via desired skills
+                </p>
+            </form>
+        </div>
+
         <% experiences.forEach((experience, i) => { %>
-            <div class='row single-container <%= (i !== 0) ? "mt-5" : "" %> <%= (i < 2) || (settings.startShowingAll) ? "" : "d-none"  %>'>
+            <div class='row mx-0 single-container <%= (i !== 0) ? "mt-5" : "" %> <%= (i < 2) || (settings.startShowingAll) ? "" : "d-none"  %>'>
                 <div class='col-lg-4 image-container'>
                     <div class='thumbnail-container'>
                         <img src="<%= experience.thumbnail %>" class="thumbnail">

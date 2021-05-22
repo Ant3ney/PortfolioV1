@@ -201,33 +201,60 @@ if(proBtn){
 }
 
 //Index search button functionality
-indexSearch = {};
-indexSearch.sectionTitle = document.getElementById('project-section-title');
-indexSearch.searchButton = document.getElementById('project-section-see-search');
-indexSearch.description = document.getElementById('project-section-search-description');
-indexSearch.searchInput = document.getElementById('search-form-input');
-indexSearch.buttonFunctionality = 'show search';
-indexSearch.form = document.getElementById('search-form-tag');
-indexSearch.onSearchPressed = (e) => {
-	if(indexSearch.buttonFunctionality === 'show search'){
+class indexSearch{
+	constructor(id){
+		this.id = id;
+		this.container = document.querySelector(`#${id}`);
+		this.buttonFunctionality = 'show search';
+	}
+	
+	pressedSeeSearchInput = (event) => {
+		let inputEle = event.target.querySelector('.search-form-input');
+		let descriptionEle = event.target.querySelector('.search-description');
+		let titleEle = event.target.querySelector('.section-title');
+		hideEle(titleEle);
+		hideEle(descriptionEle);
+		showEle(inputEle);
+	}
+
+	makeSearch = (e) => {
 		e.preventDefault();
-		indexSearch.form.setAttribute('action', `/search?search=test`);
-		indexSearch.pressedSeeSearchInput();
+		let priority = e.target.getAttribute('id').split('-')[0];
+		let search = e.target.querySelector(`.search-input-ele`).value;
+		let action = `/search?search=${search}&priority=${priority}`;
+		e.target.setAttribute('action', action);
+		e.target.submit();
+	}
+}
+
+searchContainers = [];
+
+function createOrFindSearchFucntions(id){
+	let nothingFound = true;
+	let desiredSearch;
+	searchContainers.forEach((search, i) => {
+		if(search.id === id){
+			nothingFound = false;
+			desiredSearch = search;
+		}
+	});
+	if(nothingFound){
+		desiredSearch = new indexSearch(id);
+		searchContainers.push(desiredSearch);
+	}
+
+	return desiredSearch;
+}
+onSearchPressed = (e) => {
+	e.preventDefault();
+	let id = e.target.getAttribute('id');
+	let indexSearch = createOrFindSearchFucntions(id);
+	if(indexSearch.buttonFunctionality === 'show search'){
+		indexSearch.pressedSeeSearchInput(e);
 		indexSearch.buttonFunctionality = 'make search';
+		console.log(indexSearch.container);
 	}
 	else if(indexSearch.buttonFunctionality === 'make search'){
 		indexSearch.makeSearch(e);
 	}
-}
-indexSearch.pressedSeeSearchInput = () => {
-	hideEle(indexSearch.sectionTitle);
-	hideEle(indexSearch.description);
-	showEle(indexSearch.searchInput);
-}
-indexSearch.makeSearch = (e) => {
-	e.preventDefault();
-	let input = indexSearch.searchInput;
-    let search = input.value;
-	indexSearch.form.setAttribute('action', `/search?search=${search}`);
-    e.target.submit();
 }

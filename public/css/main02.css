@@ -350,6 +350,7 @@ body{
     outline: none;
     margin-bottom: 3rem;
     margin-left: 2rem;
+    margin-right: 2rem;
     border-radius: 15px;
     background-color: transparent;
 }
@@ -398,8 +399,6 @@ body{
     box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
 }
 .project-container{
-    margin-left: 1rem;
-    margin-right: 1rem;
     background-color: white;
     border-radius: 10%;
     -webkit-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.05);
@@ -720,6 +719,34 @@ textarea.contact-text{
     margin-left: 2rem !important;
     margin-right: 2rem !important;
 }
+.search-description{
+    margin-bottom: 0;
+    width: 15rem;
+}
+.search-input-ele{
+    width: 50vw;
+    height: 4rem;
+    margin-bottom: auto;
+    border-radius: 15px;
+    border: 0.05rem solid lightgray;
+    display: flex;
+    background-color: transparent;
+}
+.search-input-ele:focus{
+    outline: none;
+    -webkit-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
+    box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
+}
+
+.search-input-ele:hover{
+    -webkit-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
+    box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
+}
+.search-form{
+    flex-wrap: wrap;
+}
 
 @media only screen and (max-width: 1550px) {
     .section-container{
@@ -844,6 +871,10 @@ textarea.contact-text{
     .project-search-description{
         font-size: 0.75rem;
         margin-left: 0rem;
+    }
+    .search-description{
+        margin-bottom: 0;
+        width: 15rem;
     }
     .section-project-title-container{
         margin-bottom: 2rem;

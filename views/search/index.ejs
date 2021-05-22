@@ -16,49 +16,26 @@
             <div class='search-page-box'>
                 <form id='search-form-tag' class='search-page-box-inner-container' onsubmit='onSearchForm(event)'>
                     <button type='submit' class='search-page-search-button'><i class="fas fa-search search-page-search-icon"></i></button>
-                    <input id='search-form-input' name='search' class='search-page-input' value='<%= search %>'/>
+                    <input id='search-form-input' name='skill' class='search-page-input' value='<%= search %>'/>
+                    <input id='search-form-input' name='priority' class='search-page-input d-none' value='<%= settings.priorty %>'/>
                 </form>
             </div>
         </div>
-        <div class='search-page-results-text-container'>
-            <p class='search-page-results-text'>
-                <%= projects.length %> projects that involve "<%= search %>"
-            </p>
-        </div>
-        <div class='row all-projects-container'>
-            <!-- Projects result -->
-            <% projects.forEach((project, i) => {%>
-                <div class='col-xl-4 col-md-6 project-col-container<% if(i > 2){ %> dt-3 <% } %>'>
-                    <div class="project-container">
-                        <img src="<%= project.thumbnail %>" class="project-thumbnail">
-			            <div class="text-container">
-                            <h4 class="project-title"><%= project.title %></h4>
-			    	        <p class="project-description">
-			    	        	<%= project.description %>
-			    	        </p>
-                            <div class="project-link-container">
-                                <% if(project.hasVisit === "true"){ %>
-                                    <div class='project-action-buttons-container mr-auto'>
-                                        <span class=''><a href='<%= project.visit %>' class='linkify project-action-button'>Visit</a><a href='<%= project.visit %>' target='_blank' class='linkify project-action-button'><i class="fas fa-external-link-alt"></i></a></span>
-                                    </div>
-                                <% } %> 	
-                                <div class='project-action-buttons-container mr-3'>
-                                    <span class=''><a href='/project/<%= project._id %>' class='linkify project-action-button'><i href='#' class="fas fa-info"></i></a></span>
-                                </div>
-                                <% if(project.hasVisit === "false" || (project.hasVisit === "true" && project.hasGitHub === "true")){ %>
-                                    <div class='project-action-buttons-container mr-3'>
-                                        <span class=''><a href='<%= project.github %>' class='linkify project-action-button'><i href='#' class="fab fa-github"></i></a></span>
-                                    </div>
-                                <% } %>
-                            </div>
-                            <% if(currentUser && currentUser.admin === 'true'){ %>
-                                <a href="/project/<%= project._id %>/edit" class="styled-button edit-project-edit-btn">Edit</a>
-                            <% } %>
-                        </div>
-                    </div>
-                </div>
-            <% }); %>
-        </div>
+        <% if(settings.priorty === 'projects'){ %>
+            <div>
+                <%- include('./body.ejs', {items: projects, name: 'project(s)'}) -%>
+            </div>
+            <div class='mt-2'>
+                <%- include('./body.ejs', {items: experiences, name: 'experience(s)'}) -%>
+            </div>
+        <% }else{ %>
+            <div>
+                <%- include('./body.ejs', {items: experiences, name: 'experience(s)'}) -%>
+            </div>
+            <div class='mt-2'>
+                <%- include('./body.ejs', {items: projects, name: 'project(s)'}) -%>
+            </div>
+        <% } %>
     </div>
 </div>
 <!-- Custum Javascript -->

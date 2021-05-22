@@ -1,8 +1,8 @@
 //Location to store helper functions needed around the app
-var middle = {};
-var express = require("express");
-var app = express();
+const middle = {};
 let Projects = require('../models/project');
+let Experience = require('../models/experience');
+const project = require('../models/project');
 
 middle.tempLog = (msg) => {
 	console.log("-*Delete later*-");
@@ -199,26 +199,50 @@ middle.cleanSearch = search => {
 middle.getProjectsThatMatchSearch = searchRaw => {
 	let search = middle.cleanSearch(searchRaw);
 	return new Promise((resolve, reject) => {
-		Projects.find({}, (err, projects) => {
-			if(err){
-				reject({msg: 'Error in middle utils getProjects of search project.find because ' + err.message});
-			}
+		Promise.all([
+			Projects.find({}),
+			Experience.find({})
+		])
+		.then((results) => {
+			let projects = results[0];
+			let experiences = results[1];
+
 			if(projects.length <= 0){
 				reject({message: 'No projects saved in databace'});
 			}
 			let matchedProjects = [];
+			let matchedExperience = [];
 			projects.forEach(project => {
 				let projectObj = project.toObject();
 				for(let i = 0; i < project.skill.length; i++){
 					let skill = middle.cleanSearch(project.skill[i]);
-					//console.log(`Comparing ${search} to ${skill}`);
 					if(search === skill){
 						matchedProjects.push(projectObj);
 						break;
 					}
 				}
 			});
-			resolve(matchedProjects);
+
+			experiences.forEach(experienceModel => {
+				let experience = experienceModel.toObject();
+				for(let i = 0; i < experience.skill.length; i++){
+					let skill = middle.cleanSearch(experience.skill[i]);
+					if(search === skill){
+						matchedExperience.push(experience);
+						break;
+					}
+				}
+			});
+
+			let returnResults = {
+				projects: matchedProjects, 
+				experiences: matchedExperience
+			}
+
+			resolve(returnResults);
+		})
+		.catch((err) => {
+			reject({message: 'Error in middle utils getProjects of search project.find because ' + err.message});
 		});
 	});
 }

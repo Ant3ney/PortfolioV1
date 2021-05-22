@@ -139,6 +139,10 @@
         -webkit-columns: 1;
         -moz-columns: 1;
     }
+    #experience-body .section-container{
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
 }
 
 @media (max-width: 991.98px) { 

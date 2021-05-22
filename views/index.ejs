@@ -125,15 +125,18 @@
 <div class="section-bg">
   <div class="section-container">
 	<div class='section-project-title-container'>
-		<form class='d-flex' id='search-form-tag' onsubmit='indexSearch.onSearchPressed(event)'>
-			
-				<h2 class="section-title extra-project-title-style" id='project-section-title'>Projects</h2>
-				<button class='see-search-input-button' id='project-section-see-search'"><i class="fas fa-search see-search-input-icon"></i></button>
-				<input id='search-form-input' name='search' class='project-search-input d-none'/>
-			
-			
+		<form class='d-flex search-form' id='experience-search-form-tag'  onsubmit='onSearchPressed(event)'>
+				<h2 class="section-title">Projects</h2>
+				<button class='see-search-input-button'>
+					<i class="fas fa-search see-search-input-icon"></i>
+				</button>
+				<input name='skill' class='search-input-ele d-none search-form-input'/>
+				<input name='priority' class='d-none' value='projects'/>
+				<p class='search-description'>
+					Search for experience via desired skills
+				</p>
 		</form>
-		<p class='project-search-description' id='project-section-search-description'>Search for projects via desired skills</p>
+		
 	</div>
 
 	<div id='projects-container' class="row all-projects-container">
