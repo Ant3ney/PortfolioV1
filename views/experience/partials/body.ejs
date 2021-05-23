@@ -39,7 +39,7 @@
                             <ul>
                                 <% for(let i = 0; i < experience.skill.length &&  i < 10; i++){ %> 
                                     <li>
-                                        <a href='#'><%= experience.skill[i] %></a>
+                                        <a href='/search?skill=<%= experience.skill[i] %>&priority=experience'><%= experience.skill[i] %></a>
                                     </li>
                                 <% } %>
                             </ul>

@@ -191,8 +191,10 @@ middle.cleanSearch = search => {
 	}
 	let retSearch = search.toLowerCase();
 	let lastTwoIndexes = retSearch.slice((retSearch.length - 2));
-	if(lastTwoIndexes === 'js' || lastTwoIndexes === 'db'){
+	while(lastTwoIndexes === 'js' || lastTwoIndexes === 'db' || retSearch.indexOf(' ') >= 0){
 		retSearch = retSearch.slice(0, (retSearch.length - 2));
+		retSearch = retSearch.replace(' ', '');
+		lastTwoIndexes = retSearch.slice((retSearch.length - 2));
 	}
 	return retSearch;
 }

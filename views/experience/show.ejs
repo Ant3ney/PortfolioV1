@@ -22,7 +22,7 @@
                 <h3 class='mt-4'>Skills involved</h3>
                 <ul class='skills mt-4'>
                     <% experience.skill.forEach((skill, i) => { %>
-                        <li class='<%= i === 0 ? "first-li" : "" %>'><a href='#'><%= skill %></a></li>
+                        <li class='<%= i === 0 ? "first-li" : "" %>'><a href='/search?skill=<%= skill %>&priority=experience'><%= skill %></a></li>
                     <% }) %>
                 </ul>
             </div>

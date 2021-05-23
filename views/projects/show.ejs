@@ -64,7 +64,7 @@
                 li.classList.add('project-page-skill-item-li');
                 a.classList.add('linkify');
                 a.innerText = skill;
-                a.setAttribute('href', '#');
+                a.setAttribute('href', `/search?skill=${skill}&priority=projects`);
 
                 if(i !== 0 && i !== 1){
                     li.classList.add('mt-3');

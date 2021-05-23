@@ -23,17 +23,17 @@
         </div>
         <% if(settings.priorty === 'projects'){ %>
             <div>
-                <%- include('./body.ejs', {items: projects, name: 'project(s)'}) -%>
+                <%- include('./body.ejs', {items: projects, name: 'project'}) -%>
             </div>
             <div class='mt-2'>
-                <%- include('./body.ejs', {items: experiences, name: 'experience(s)'}) -%>
+                <%- include('./body.ejs', {items: experiences, name: 'experience'}) -%>
             </div>
         <% }else{ %>
             <div>
-                <%- include('./body.ejs', {items: experiences, name: 'experience(s)'}) -%>
+                <%- include('./body.ejs', {items: experiences, name: 'experience'}) -%>
             </div>
             <div class='mt-2'>
-                <%- include('./body.ejs', {items: projects, name: 'project(s)'}) -%>
+                <%- include('./body.ejs', {items: projects, name: 'project'}) -%>
             </div>
         <% } %>
     </div>

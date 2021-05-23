@@ -37,6 +37,9 @@
 #experience-body .single-container{
     background-color: white;
     border-radius: 15px;
+    -webkit-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.05);
+    -moz-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.05);
+    box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.05);
 }
 
 #experience-body .text-content{
@@ -128,6 +131,12 @@
 }
 #experience-show-container ul{
     margin-bottom: 0rem;
+}
+
+#experience-body .single-container:hover{
+    -webkit-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
+    box-shadow: 4px 4px 9px 0px rgba(0,0,0,0.1);
 }
 /* Breakpoints */
 @media (max-width: 1199.98px) { 

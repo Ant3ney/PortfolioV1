@@ -486,9 +486,10 @@ body{
 .about-me-img{
 	margin-right: auto;
 	margin-left: auto;
-	border-radius: 50%;
+	border-radius: 15px;
 	max-height: 20rem;
 	max-width: 100%;
+    object-fit: cover;
 }
 
 .contact-into-container{
@@ -749,6 +750,9 @@ textarea.contact-text{
 }
 .d-dir-col{
     flex-direction: column;
+}
+#about-me-container{
+    letter-spacing: .25rem;
 }
 @media only screen and (max-width: 1550px) {
     .section-container{
