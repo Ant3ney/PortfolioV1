@@ -48,6 +48,8 @@ router.post('/contactMe', (req, res) => {
 		subject: 'Portfolio Mail',
 	});
 
+	console.log(`sending to : ${emailServerOrgin}/sendMail`);
+
 	fetch(`${emailServerOrgin}/sendMail`, {
 		method: 'post',
 		body: body,
@@ -60,9 +62,16 @@ router.post('/contactMe', (req, res) => {
 		})
 		.then(status => {
 			console.log(status);
-			res.redirect('/sucessfullEmail');
+			if (status && !status.message && status.message !== 'sucessfull') {
+				console.log('Email failed');
+				res.redirect('/failedEmail');
+			} else {
+				console.log('Email was sucessfull');
+				res.redirect('/sucessfullEmail');
+			}
 		})
 		.catch(err => {
+			console.error('Faild to send email');
 			console.error(err);
 			res.redirect('/failedEmail');
 		});
@@ -74,7 +83,7 @@ router.get('/sucessfullEmail', (req, res) => {
 });
 
 router.get('/failedEmail', (req, res) => {
-	req.flash('error', 'email failed to send');
+	req.flash('error', 'Email failed to send');
 	res.redirect('/');
 });
 
