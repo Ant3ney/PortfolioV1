@@ -1,73 +1,130 @@
 <!-- Edit project view -->
 <%- include("../partials/altHeader") -%>
-	<!-- Custum css -->
-	<link rel="stylesheet" type="text/css" href="/css/projectStyle.css">
-	<div class="section-bg">
-		<div class="section-container">
-			<h2 class="section-title special">
-				Edit Project
-			</h2>
-			<form class="project-form project-form-js" action="/project/<%= project._id %>?_method=PUT" method="POST">
-				<input class="form-ele" type="text" name="imgUrl" placeholder="image url" value="<%= project.thumbnail %>">
-				<input class="form-ele mt-2" type="text" name="title" placeholder="Project title" value="<%= project.title %>">
-				<textarea class="form-ele mt-2" name="description" placeholder="Project description"><%= project.description %></textarea>
-				<div class="form-ele mt-2 d-flex">
-					<div class="text-container p-0">
-						<p class="mb-0 mr-5 my-auto">
-							Can visit?
-						</p>
-					</div>
-					<input class="my-auto checkbox-pro-option" type="checkbox" name="visitableProject" <% if(project.hasVisit === "true"){ %> checked='on' <% } %>>
-				</div>
-				<input class="form-ele mt-2" type="text" name="visitUrl" placeholder="url" value="<%= project.visit %>">
-				<div class="form-ele mt-2 d-flex">
-					<div class="text-container p-0">
-						<p class="mb-0 mr-5 my-auto">
-							Has visit link
-						</p>
-					</div>
-					<input class="my-auto checkbox-pro-option" type="checkbox" name="visitableScorce" <% if(project.hasGitHub === "true"){ %> checked='on' <% } %>>
-				</div>
-				<input class="form-ele mt-2" type="text" name="githubUrl" placeholder="Github url" value="<%= project.github %>">
-				<label class="my-2 skill-label">
-					Skills
-				</label>
-				<div id='skill-list' class="multi-skill-container mb-2">
-					<% project.skill.forEach((skill, i) => { %>
-						<div class="single-skill-container">
-							<input class="skill-ele form-ele skill-ele-0 mb-2" type="text" name="skill-ele-<%= i %>" placeholder="nodejs" value="<%= skill %>">
-							<span class="m-auto"></span><span class="icon-container del-icon-container"><i class="far fa-times-circle exit-icon skill-delete-icon"></i></span>
-						</div>
-					<% }); %>
-					<% if(project.skill.length <= 0) { %>
-						<div class="single-skill-container">
-							<input class="skill-ele form-ele skill-ele-0 mb-2" type="text" name="skill-ele-0" placeholder="nodejs">
-							<span class="m-auto"></span><span class="icon-container del-icon-container"><i class="far fa-times-circle exit-icon skill-delete-icon"></i></span>
-						</div>
-					<% } %>
-				</div>
-				<div class="row w-100 mt-2 mx-0">
-					<div class="col-md-4 d-flex">
-						<button id="add-skill" class="styled-button skill-action-btn p-3">
-							Add skill
-						</button>
-					</div>
-					<div class="col-md-4 d-flex">
-						<button class="styled-button skill-action-btn p-3" type="submit">
-							Submit
-						</button>
-					</div>
-					<div class="col-md-4 d-flex">
-						<button class="styled-button skill-action-btn delete-btn-js p-3" type="submit">
-							Delete project
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>	
-	</div>
-	
-	<!-- Custum javascript -->
-	<script src="/js/projectFunction.js"></script>
-	<script src="/js/skillFunction.js"></script>
+<!-- Custum css -->
+<link rel="stylesheet" type="text/css" href="/css/projectStyle.css" />
+<div class="section-bg">
+   <div class="section-container">
+      <h2 class="section-title special">Edit Project</h2>
+      <form
+         id="experience-details-list"
+         class="project-form project-form-js"
+         action="/project/<%= project._id %>?_method=PUT"
+         method="POST"
+      >
+         <input
+            class="form-ele"
+            type="text"
+            name="imgUrl"
+            placeholder="image url"
+            value="<%= project.thumbnail %>"
+         />
+         <input
+            class="form-ele mt-2"
+            type="text"
+            name="title"
+            placeholder="Project title"
+            value="<%= project.title %>"
+         />
+         <textarea
+            class="form-ele mt-2"
+            name="description"
+            placeholder="Project description"
+         >
+<%= project.description %></textarea
+         >
+         <div class="form-ele mt-2 d-flex">
+            <div class="text-container p-0">
+               <p class="mb-0 mr-5 my-auto">Can visit?</p>
+            </div>
+            <input class="my-auto checkbox-pro-option" type="checkbox"
+            name="visitableProject" <% if(project.hasVisit === "true"){ %>
+            checked='on' <% } %>>
+         </div>
+         <input
+            class="form-ele mt-2"
+            type="text"
+            name="visitUrl"
+            placeholder="url"
+            value="<%= project.visit %>"
+         />
+         <div class="form-ele mt-2 d-flex">
+            <div class="text-container p-0">
+               <p class="mb-0 mr-5 my-auto">Has visit link</p>
+            </div>
+            <input class="my-auto checkbox-pro-option" type="checkbox"
+            name="visitableScorce" <% if(project.hasGitHub === "true"){ %>
+            checked='on' <% } %>>
+         </div>
+         <input
+            class="form-ele mt-2"
+            type="text"
+            name="githubUrl"
+            placeholder="Github url"
+            value="<%= project.github %>"
+         />
+         <label class="my-2 skill-label"> Skills </label>
+         <div id="skill-list" class="multi-skill-container mb-2">
+            <% project.skill.forEach((skill, i) => { %>
+            <div class="single-skill-container">
+               <input
+                  class="skill-ele form-ele skill-ele-0 mb-2"
+                  type="text"
+                  name="skill-ele-<%= i %>"
+                  placeholder="nodejs"
+                  value="<%= skill %>"
+               />
+               <span class="m-auto"></span
+               ><span class="icon-container del-icon-container"
+                  ><i
+                     class="far fa-times-circle exit-icon skill-delete-icon"
+                  ></i
+               ></span>
+            </div>
+            <% }); %> <% if(project.skill.length <= 0) { %>
+            <div class="single-skill-container">
+               <input
+                  class="skill-ele form-ele skill-ele-0 mb-2"
+                  type="text"
+                  name="skill-ele-0"
+                  placeholder="nodejs"
+               />
+               <span class="m-auto"></span
+               ><span class="icon-container del-icon-container"
+                  ><i
+                     class="far fa-times-circle exit-icon skill-delete-icon"
+                  ></i
+               ></span>
+            </div>
+            <% } %>
+         </div>
+         <div class="row w-100 mt-2 mx-0">
+            <div class="col-md-4 d-flex">
+               <button
+                  id="add-skill"
+                  class="styled-button skill-action-btn p-3 add-list"
+               >
+                  Add skill
+               </button>
+            </div>
+            <div class="col-md-4 d-flex">
+               <button class="styled-button skill-action-btn p-3" type="submit">
+                  Submit
+               </button>
+            </div>
+            <div class="col-md-4 d-flex">
+               <button
+                  class="styled-button skill-action-btn delete-btn-js p-3"
+                  type="submit"
+               >
+                  Delete project
+               </button>
+            </div>
+         </div>
+      </form>
+   </div>
+</div>
+
+<!-- Custum javascript -->
+<script src="/js/projectFunction.js"></script>
+<script src="/js/skillFunction.js"></script>
 <%- include("../partials/altFooter") -%>

@@ -1,165 +1,77 @@
 <%- include('../partials/altHeader') -%>
 <style>
-    html{
-        background-color: #EFF6FB;
-    }
-    body{
-        display:flex;
-        flex-direction: column;
-        height: auto;
-        background-color: #EFF6FB;
-    }
+   html {
+      background-color: #eff6fb;
+   }
+   body {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      background-color: #eff6fb;
+   }
 </style>
 <div class="section-bg my-0 extra-project-page-conter-style">
-    <div class="section-container">
-        <h2 class="section-title align-left mb-2 extra-project-page-section-title-style"><%= project.title %></h2>
-        <div class='row top-project-row'>
-            <div class='col-md-6 porject-info-col'>
-                <img class='project-page-img' src='<%= project.thumbnail %>'>
-                <div class='project-page-desciption mt-3'>
-                    <%= project.description %>
-                </div>     
-                <div class='project-page-action-buttons-container mt-3'>
-                    <% if(project.hasVisit === "true"){ %>
-                        <span class='project-page-visit-action-button mr-3'><a href='<%= project.visit %>' class='linkify project-action-button'>Visit</a><a href='<%= project.visit %>' target='_blank' class='linkify project-action-button'><i class="fas fa-external-link-alt"></i></a></span>
-                    <% } if(project.hasVisit === "false" || (project.hasVisit === "true" && project.hasGitHub === "true")){ %>
-                        <span class='project-page-github-action-button'><a href='<%= project.github %>' class='linkify project-action-button'><i class="fab fa-github"></i></a></span>
-                    <% } %>
-                </div>    
+   <div class="section-container">
+      <h2
+         class="
+            section-title
+            align-left
+            mb-2
+            extra-project-page-section-title-style
+         "
+      >
+         <%= project.title %>
+      </h2>
+      <div class="row top-project-row">
+         <div class="col-md-6 porject-info-col">
+            <img class="project-page-img" src="<%= project.thumbnail %>" />
+            <div class="project-page-desciption mt-3">
+               <%= project.description %>
             </div>
-            <div class='col-md-6 mb-0 project-page-skills-involved-container'>
-                <h3 class='project-page-skills-involved-header'>Skills Involved</h3>
-                <div class='row project-page-skills-involved-row'>
-                    
-                    <div class='col-6 project-page-skills-col pl-0'>
-                        <ul class='project-page-skills-ul'>
-                        </ul>
-                    </div>
-                    <div class='col-6  project-page-skills-col '>
-                        <ul class='project-page-skills-ul'>
-                        </ul>
-                    </div>
-                </div>
-                <button class="see-all-projects mx-auto">See all</button>
+            <div class="project-page-action-buttons-container mt-3">
+               <% if(project.hasVisit === "true"){ %>
+               <span class="project-page-visit-action-button mr-3"
+                  ><a
+                     href="<%= project.visit %>"
+                     class="linkify project-action-button"
+                     >Visit</a
+                  ><a
+                     href="<%= project.visit %>"
+                     target="_blank"
+                     class="linkify project-action-button"
+                     ><i class="fas fa-external-link-alt"></i></a
+               ></span>
+               <% } if(project.hasVisit === "false" || (project.hasVisit ===
+               "true" && project.hasGitHub === "true")){ %>
+               <span class="project-page-github-action-button"
+                  ><a
+                     href="<%= project.github %>"
+                     class="linkify project-action-button"
+                     ><i class="fab fa-github"></i></a
+               ></span>
+               <% } %>
             </div>
-        </div>
-    </div>
+         </div>
+         <div class="col-md-6 mb-0 project-page-skills-involved-container">
+            <h3 class="project-page-skills-involved-header">Skills Involved</h3>
+            <div
+               class="
+                  row
+                  project-page-skills-involved-row
+                  skills-show-container
+               "
+            >
+               <!-- prettier-ignore -->
+               <ul class='skills mt-4 two-col-list list-skills-container'>
+                    <%  project.skill.forEach((skill, i) => { %>
+                        <li class='<%= i === 0 ? "first-li" : "" %>'><a href='/search?skill=<%= skill %>&priority=experience'><%= skill %></a></li>
+                    <% }) %>
+                </ul>
+            </div>
+            <!-- <button class="see-all-projects mx-auto">See all</button> -->
+         </div>
+      </div>
+   </div>
 </div>
-<script>
-    //#region skill items list
-        console.log(JSON.parse('<%- JSON.stringify(project) %>'));
-        let projectPage = {};
-        projectPage.projectSkills = JSON.parse('<%- JSON.stringify(project) %>').skill;
-        projectPage.list1 = document.getElementsByClassName('project-page-skills-ul')[0];
-        projectPage.list2 = document.getElementsByClassName('project-page-skills-ul')[1];
-        projectPage.skillDisplayToggle = document.querySelector('.see-all-projects');
-        projectPage.fullSkillsVisable = false;
 
-        projectPage.setUpProjectSkillsWith = function (skills){
-            const list1 = projectPage.list1;
-            const list2 = projectPage.list2;
-            skills.forEach((skill, i) => {
-                const li = document. createElement("LI");
-                const a = document.createElement("A");
-                li.classList.add('project-page-skill-item-li');
-                a.classList.add('linkify');
-                a.innerText = skill;
-                a.setAttribute('href', `/search?skill=${skill}&priority=projects`);
-
-                if(i !== 0 && i !== 1){
-                    li.classList.add('mt-3');
-                }
-                if(i > 9){
-                    li.classList.add('d-none');
-                }
-
-                li.appendChild(a);
-                if(i % 2 === 0){
-                    list1.appendChild(li);
-                }
-                else{
-                    list2.appendChild(li);
-                }
-            });
-        }
-        projectPage.pressedSeeAllSkills = () => {
-            const list1 = projectPage.list1;
-            const list2 = projectPage.list2;
-            const displayButtonToggle = projectPage.skillDisplayToggle;
-            let lis = projectPage.getConcatListArrays(list1, list2);
-            
-            lis.forEach((li) => {
-                projectPage.showEle(li);
-            });
-
-            displayButtonToggle.innerText = 'Show less';
-        }
-        projectPage.pressedSeeLessSkills = () => {
-            const list1 = projectPage.list1;
-            const list2 = projectPage.list2;
-            const displayButtonToggle = projectPage.skillDisplayToggle;
-            let list1Ary = projectPage.toArray(list1.getElementsByTagName('li'));
-            let list2Ary = projectPage.toArray(list2.getElementsByTagName('li'));
-
-            list1Ary.forEach((li, i) => {
-                if(i > 5){
-                    projectPage.hideEle(li);
-                }
-            });
-            list2Ary.forEach((li, i) => {
-                if(i > 5){
-                    projectPage.hideEle(li);
-                }
-            });
-
-            displayButtonToggle.innerText = 'Show more';
-        }
-        projectPage.toggleSeeFullSkills = () => {
-            if(projectPage.fullSkillsVisable){
-                projectPage.fullSkillsVisable = false;
-                projectPage.pressedSeeLessSkills();
-            }
-            else{
-                projectPage.fullSkillsVisable = true;
-                projectPage.pressedSeeAllSkills();
-            }
-        }
-        projectPage.getConcatListArrays = (list1, list2) => {
-            let list1Ary = projectPage.toArray(list1.getElementsByTagName('li'));
-            let list2Ary = projectPage.toArray(list2.getElementsByTagName('li'));
-            let lis = list1Ary.concat(list2Ary);
-
-            return lis;
-        }
-        projectPage.showEle = (ele) => {
-            while(ele.classList.contains('d-none')){
-                ele.classList.remove('d-none');
-            }
-        }
-        projectPage.hideEle = ele => {
-            ele.classList.add('d-none');
-        }
-        projectPage.toArray = (obj) => {
-          var array = [];
-          // iterate backwards ensuring that length is an UInt32
-          for (var i = obj.length >>> 0; i--;) { 
-            array[i] = obj[i];
-          }
-          return array;
-        }
-        projectPage.decideSeeMoreVisability = () => {
-            if(!projectPage.projectSkills || !projectPage.projectSkills.length < 11){
-                projectPage.hideEle(projectPage.skillDisplayToggle);
-            }
-        }
-
-        //exicution
-        if(projectPage.projectSkills && projectPage.projectSkills.length > 0){
-            projectPage.setUpProjectSkillsWith(projectPage.projectSkills);
-        }
-        projectPage.decideSeeMoreVisability();
-        projectPage.skillDisplayToggle.addEventListener('click', projectPage.toggleSeeFullSkills);
-
-    //#endregion
-</script>
 <%- include('../partials/altFooter') -%>
