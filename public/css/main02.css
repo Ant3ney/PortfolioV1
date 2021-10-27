@@ -758,6 +758,7 @@ textarea.contact-text {
 
 .list-skills-container {
    list-style-type: '-';
+   width: 100%;
 }
 
 .skills-show-container li {
