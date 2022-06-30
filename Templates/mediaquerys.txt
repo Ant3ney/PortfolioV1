@@ -1,0 +1,26 @@
+/* 2xl by default */
+@media (max-width: 640px) {
+	/* sm */
+}
+@media (max-width: 768px) {
+	/* md */
+}
+@media (max-width: 1024px) {
+	/* lg */
+}
+@media (max-width: 1280px) {
+	/* xl */
+}
+@media (max-width: 2080px) {
+	/* 2xl */
+}
+@media (min-width: 2080px) {
+	/* 3xl */
+}
+
+const isSM = useMediaQuery({ query: '(max-width: 640px)' })
+const is3XL = useMediaQuery({ query: '(min-width: 2080px)' })
+const is2XL = useMediaQuery({ query: '(max-width: 2080px)' })
+const isXL = useMediaQuery({ query: '(max-width: 1280px)' })
+const isLG = useMediaQuery({ query: '(max-width: 1024px)' })
+const isMD = useMediaQuery({ query: '(max-width: 768px)' })
