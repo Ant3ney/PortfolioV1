@@ -24,14 +24,14 @@ function LandingScreen() {
 		}
 		setTimeout(() => {
 			heroImgEle.classList.add('dab-stage');
-			heroImgEle.setAttribute('src', '/spongeman/dab.png');
+			heroImgEle.setAttribute('src', '/spongeman/dab.webp');
 		}, 2000);
 		setTimeout(() => {
-			heroImgEle.setAttribute('src', '/spongeman/normal.png');
+			heroImgEle.setAttribute('src', '/spongeman/normal.webp');
 			heroImgEle.classList.remove('dab-stage');
 		}, 2250);
 		setTimeout(() => {
-			heroImgEle.setAttribute('src', '/spongeman/catch.png');
+			heroImgEle.setAttribute('src', '/spongeman/catch.webp');
 			heroImgEle.classList.add('catch-stage');
 			heroImgEle.classList.remove('dab-stage');
 		}, 4000);
@@ -69,7 +69,7 @@ function LandingScreen() {
 							</motion.div>
 						</div>
 					</div>
-					<img src='/spongeman/normal.png' className='hero-image h-auto mr-auto ml-auto' alt='hero' />
+					<img src='/spongeman/normal.webp' className='hero-image h-auto mr-auto ml-auto' alt='hero' />
 				</motion.div>
 			</section>
 		);
@@ -83,7 +83,7 @@ function LandingScreen() {
 				<h1 className={`${isMobile ? 'mt-auto' : 'mt-auto'} ml-auto mr-auto mb-0`}>
 					Hello, I’m an Expert Jr. React JS Developer
 				</h1>
-				<button className={`${isMobile ? 'mt-4' : 'mt-2'} mb-auto ml-auto mr-auto mb-0`}>Get in Touch</button>
+				<button className={`${isMobile ? 'mt-4' : 'mt-2'} mb-auto ml-auto mr-auto`}>Get in Touch</button>
 			</section>
 		);
 	}
