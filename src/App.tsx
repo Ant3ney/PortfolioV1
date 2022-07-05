@@ -10,9 +10,78 @@ function App() {
 		<div className='App'>
 			<Header />
 			<LandingScreen />
-			<div>Card</div>
+			<ProjectDisplay />
 		</div>
 	);
+}
+
+function ProjectDisplay() {
+	const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
+	const projectData = [
+		{
+			title: 'Singularity',
+			description: 'Singularity is a Next app and is a home for my unofficial company called Singularity',
+			thumbnail: 'thumbnails/singularity.png',
+		},
+		{
+			title: 'The BRUG Method',
+			description: '   I built this site from top to bottom using React, Express, and Pay Pal.',
+			thumbnail: 'thumbnails/brug.png',
+		},
+		{
+			title: '24/7 Sales',
+			description: 'Browse hundreds of games with huge sales.',
+			thumbnail: 'thumbnails/247.png',
+		},
+	];
+
+	return (
+		<div className='project-display-container w-full portfolio-container flex-col'>
+			<h1 className='mt-40 mb-32'>Portfolio</h1>
+			{projectData.map((project: any, i: number) => {
+				return <Project {...project} key={i} />;
+			})}
+		</div>
+	);
+}
+
+function Project(project: any) {
+	const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
+	return (
+		<div className='project-container flex mt-8 h-screen'>
+			<section className='flex flex-col w-1/2'>
+				<div className='m-auto p-4 w-full'>
+					<Title />
+					<div
+						className='project-thumbnail-container mt-4'
+						style={{
+							backgroundImage: `url(${project.thumbnail})`,
+						}}
+					>
+						<img src={project.thumbnail} />
+					</div>
+					<button className='mt-4'>Visit</button>
+				</div>
+			</section>
+			<section className='flex flex-col w-1/2'>
+				<div className='m-auto p-4 w-full'>
+					<h1>Description</h1>
+					<p>{project.description}</p>
+					<h1>Key Skills</h1>
+					<span></span>
+				</div>
+			</section>
+		</div>
+	);
+
+	function Title({ className, ...rest }: any) {
+		const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
+		return (
+			<h1 className={`${className}`} {...rest}>
+				{project.title}
+			</h1>
+		);
+	}
 }
 
 function LandingScreen() {
@@ -58,17 +127,14 @@ function LandingScreen() {
 	}, [allImagesLoaded]);
 
 	return (
-		<>
-			<div
-				className={`${
-					isMobile ? '' : 'h-screen'
-				} landing-screen-container w-full flex portfolio-container overflow-hidden flex-wrap`}
-			>
-				{isMobile ? <HeroSection /> : <InfoSection />}
-				{isMobile ? <InfoSection /> : <HeroSection />}
-			</div>
-			<div className='w-2 h-screen'></div>
-		</>
+		<div
+			className={`${
+				isMobile ? '' : 'h-screen'
+			} landing-screen-container w-full flex portfolio-container overflow-hidden flex-wrap`}
+		>
+			{isMobile ? <HeroSection /> : <InfoSection />}
+			{isMobile ? <InfoSection /> : <HeroSection />}
+		</div>
 	);
 
 	function HeroSection() {
@@ -138,7 +204,7 @@ function LandingScreen() {
 
 function Header() {
 	return (
-		<header className='flex flex-row w-screen'>
+		<header className='flex flex-row w-screen max-w-full'>
 			<nav className='flex w-full portfolio-container'>
 				<ul className='mr-auto flex'>
 					<li className='h-full w-auto p-6 pl-0'>
