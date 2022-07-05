@@ -22,22 +22,25 @@ function ProjectDisplay() {
 			title: 'Singularity',
 			description: 'Singularity is a Next app and is a home for my unofficial company called Singularity',
 			thumbnail: 'thumbnails/singularity.png',
+			skills: ['react', 'next', 'sass', 'sanity.io'],
 		},
 		{
 			title: 'The BRUG Method',
 			description: '   I built this site from top to bottom using React, Express, and Pay Pal.',
 			thumbnail: 'thumbnails/brug.png',
+			skills: ['react', 'next', 'sass', 'sanity.io'],
 		},
 		{
 			title: '24/7 Sales',
 			description: 'Browse hundreds of games with huge sales.',
 			thumbnail: 'thumbnails/247.png',
+			skills: ['react', 'next', 'sass', 'sanity.io'],
 		},
 	];
 
 	return (
 		<div className='project-display-container w-full portfolio-container flex-col'>
-			<h1 className='mt-40 mb-32'>Portfolio</h1>
+			<h1 className='mt-40 mb-10'>Portfolio</h1>
 			{projectData.map((project: any, i: number) => {
 				return <Project {...project} key={i} />;
 			})}
@@ -64,11 +67,19 @@ function Project(project: any) {
 				</div>
 			</section>
 			<section className='flex flex-col w-1/2'>
-				<div className='m-auto p-4 w-full'>
+				<div className='m-auto p-4 w-full flex flex-col'>
 					<h1>Description</h1>
-					<p>{project.description}</p>
-					<h1>Key Skills</h1>
-					<span></span>
+					<p className='mt-2'>{project.description}</p>
+					<h1 className='mt-4'>Key Skills</h1>
+					<div className='flex flex-wrap mx-auto w-fit'>
+						{project.skills.map((skill: string, i: number) => {
+							return (
+								<p key={i} className={`mt-2 ${i !== project.skills.length - 1 ? 'mr-2' : ''}`}>
+									{skill}
+								</p>
+							);
+						})}
+					</div>
 				</div>
 			</section>
 		</div>
