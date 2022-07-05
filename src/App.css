@@ -1,6 +1,10 @@
 .App {
 	text-align: center;
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	/* overflow-x: hidden; */
 }
 
 /* header section start */
@@ -120,6 +124,8 @@ button {
 	.landing-screen-container {
 		height: 90vh;
 		margin-top: 10vh;
+		position: absolute;
+		top: 0;
 	}
 
 	.hero-image {

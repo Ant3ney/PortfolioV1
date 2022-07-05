@@ -10,6 +10,7 @@ function App() {
 		<div className='App'>
 			<Header />
 			<LandingScreen />
+			<div>Card</div>
 		</div>
 	);
 }
@@ -57,14 +58,17 @@ function LandingScreen() {
 	}, [allImagesLoaded]);
 
 	return (
-		<div
-			className={`${
-				isMobile ? '' : 'h-screen'
-			} landing-screen-container w-full flex portfolio-container overflow-hidden flex-wrap`}
-		>
-			{isMobile ? <HeroSection /> : <InfoSection />}
-			{isMobile ? <InfoSection /> : <HeroSection />}
-		</div>
+		<>
+			<div
+				className={`${
+					isMobile ? '' : 'h-screen'
+				} landing-screen-container w-full flex portfolio-container overflow-hidden flex-wrap`}
+			>
+				{isMobile ? <HeroSection /> : <InfoSection />}
+				{isMobile ? <InfoSection /> : <HeroSection />}
+			</div>
+			<div className='w-2 h-screen'></div>
+		</>
 	);
 
 	function HeroSection() {
@@ -134,7 +138,7 @@ function LandingScreen() {
 
 function Header() {
 	return (
-		<header className='flex flex-row w-screen fixed'>
+		<header className='flex flex-row w-screen'>
 			<nav className='flex w-full portfolio-container'>
 				<ul className='mr-auto flex'>
 					<li className='h-full w-auto p-6 pl-0'>
