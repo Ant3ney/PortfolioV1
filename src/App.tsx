@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import { motion } from 'framer-motion';
 import './App.css';
@@ -16,26 +16,45 @@ function App() {
 
 function LandingScreen() {
 	const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
+	const [normalImageLoaded, setNormalImageLoaded] = useState(false);
+	const [dabImageLoaded, setDabImageLoaded] = useState(false);
+	const [catchImageLoaded, setCatchImageLoaded] = useState(false);
+	const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+
 	useEffect(() => {
-		const heroImgEle = document.querySelector('.hero-image');
-		if (!heroImgEle) {
-			console.error('failed to find hero img');
+		console.log(
+			'normalImageLoaded, dabImageLoaded, catchImageLoaded',
+			normalImageLoaded,
+			dabImageLoaded,
+			catchImageLoaded
+		);
+		if (normalImageLoaded && dabImageLoaded && catchImageLoaded) {
+			setAllImagesLoaded(true);
+		}
+	}, [normalImageLoaded, dabImageLoaded, catchImageLoaded]);
+
+	useEffect(() => {
+		if (!allImagesLoaded) return;
+		const normalImgEle = document.querySelector('.hero-image');
+		const debImgEle = document.querySelector('.dab-stage');
+		const catchImgEle = document.querySelector('.catch-stage');
+		if (!normalImgEle || !debImgEle || !catchImgEle) {
+			console.error('failed to find all images');
 			return;
 		}
 		setTimeout(() => {
-			heroImgEle.classList.add('dab-stage');
-			heroImgEle.setAttribute('src', '/spongeman/dab.webp');
+			normalImgEle.classList.add('hidden');
+			debImgEle.classList.remove('hidden');
 		}, 2000);
 		setTimeout(() => {
-			heroImgEle.setAttribute('src', '/spongeman/normal.webp');
-			heroImgEle.classList.remove('dab-stage');
+			normalImgEle.classList.remove('hidden');
+			debImgEle.classList.add('hidden');
 		}, 2250);
 		setTimeout(() => {
-			heroImgEle.setAttribute('src', '/spongeman/catch.webp');
-			heroImgEle.classList.add('catch-stage');
-			heroImgEle.classList.remove('dab-stage');
+			normalImgEle.classList.add('hidden');
+			catchImgEle.classList.remove('hidden');
 		}, 4000);
-	}, []);
+	}, [allImagesLoaded]);
 
 	return (
 		<div
@@ -51,10 +70,11 @@ function LandingScreen() {
 	function HeroSection() {
 		const animateObjLaptop = isMobile ? { x: [-3000, -3000, -3000, 0] } : { y: [-3000, -3000, -3000, 0] };
 		const animateObjSponge = isMobile ? { x: [300, 0] } : { y: [300, 0] };
+
 		return (
 			<section className={`${isMobile ? 'w-full h-1/2 flex' : 'w-1/2 h-full flex flex-col p-2'}`}>
 				<motion.div
-					className='mt-auto mb-auto relative mx-auto flex'
+					className={`mt-auto mb-auto relative mx-auto flex ${allImagesLoaded ? '' : 'hidden'}`}
 					animate={animateObjSponge}
 					transition={{ duration: 2, times: [0, 1] }}
 				>
@@ -69,7 +89,30 @@ function LandingScreen() {
 							</motion.div>
 						</div>
 					</div>
-					<img src='/spongeman/normal.webp' className='hero-image h-auto mr-auto ml-auto' alt='hero' />
+					<img
+						src='/spongeman/normal.webp'
+						onLoad={() => {
+							setNormalImageLoaded(true);
+						}}
+						className='hero-image h-auto mr-auto ml-auto'
+						alt='hero'
+					/>
+					<img
+						src='/spongeman/dab.webp'
+						onLoad={() => {
+							setDabImageLoaded(true);
+						}}
+						className={`hero-image h-auto mr-auto ml-auto dab-stage hidden`}
+						alt='hero'
+					/>
+					<img
+						src='/spongeman/catch.webp'
+						onLoad={() => {
+							setCatchImageLoaded(true);
+						}}
+						className='hero-image h-auto mr-auto ml-auto catch-stage hidden'
+						alt='hero'
+					/>
 				</motion.div>
 			</section>
 		);
