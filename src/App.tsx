@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import './App.css';
 import './App.scss';
 import { useMediaQuery } from 'react-responsive';
+import './Contact.scss';
 
 function App() {
 	return (
@@ -11,39 +12,125 @@ function App() {
 			<Header />
 			<LandingScreen />
 			<ProjectDisplay />
+			<ContactContainer />
+		</div>
+	);
+}
+
+function ContactContainer() {
+	const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
+	const fetchJsFromCDN = (src: string, externals = []) => {
+		new Promise((resolve, reject) => {
+			const script = document.createElement('script');
+			script.setAttribute('src', src);
+			//@ts-ignore
+			script.setAttribute('asyc', true);
+			script.addEventListener('load', () => {
+				resolve(
+					externals.map(key => {
+						const ext = window[key];
+						typeof ext === 'undefined' && console.warn(`No external named '${key}' in window`);
+						return ext;
+					})
+				);
+			});
+			script.addEventListener('error', reject);
+			document.body.appendChild(script);
+		});
+	};
+	useEffect(() => {
+		(async () => {
+			await fetchJsFromCDN('https://assets.calendly.com/assets/external/widget.js');
+		})();
+	}, [isMobile]);
+	return (
+		<div className='contact-container flex flex-col mt-16 mb-16'>
+			<h1 className={`portfolio-container center ${isMobile ? 'w-full text-center' : ''}`}>Get In Touch</h1>
+			<section className='info-container flex flex-wrap portfolio-container'>
+				<div className={`info-kv-container flex mt-4 ${isMobile ? 'w-full' : 'mr-4'}`}>
+					<label className={`${isMobile ? 'ml-auto' : ''} mr-2`}>Email:</label>
+					<p className={`${isMobile ? 'mr-auto' : ''}`}>
+						anthonycavuoti<span className='less'>@</span>gmail.com
+					</p>
+				</div>
+				<div className={`info-kv-container flex mt-4 ${isMobile ? 'w-full' : 'mr-4'}`}>
+					<label className={`${isMobile ? 'ml-auto' : ''} mr-2`}>Number:</label>
+					<p className={`${isMobile ? 'mr-auto' : ''}`}>(424) 201-9017</p>
+				</div>
+				<div className={`info-kv-container flex mt-4 ${isMobile ? 'w-full' : 'mr-4'}`}>
+					<label className={`${isMobile ? 'ml-auto' : ''} mr-2`}>Github:</label>
+					<p className={`${isMobile ? 'mr-auto' : ''}`}>github.com/Ant3ney</p>
+				</div>
+				<div className={`info-kv-container flex mt-4 ${isMobile ? 'w-full flex-wrap' : 'mr-4'}`}>
+					<label className={`${isMobile ? 'w-full' : ''} mr-2`}>Linkedin:</label>
+					<p className={`${isMobile ? 'w-full mt-1' : ''}`}>linkedin.com/in/anthony-cavuoti-developer</p>
+				</div>
+			</section>
+			<div
+				className='calendy-container calendly-inline-widget mt-8'
+				data-url={`https://calendly.com/anthonycavuoti/scheduleinterview`}
+				style={{
+					width: '100%',
+					height: isMobile ? `920px` : `966px`,
+				}}
+			></div>
 		</div>
 	);
 }
 
 function ProjectDisplay() {
 	const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
+	const [extendProjects, setExtendProjects] = useState(false);
 	const projectData = [
 		{
 			title: 'Singularity',
-			description: 'Singularity is a Next app and is a home for my unofficial company called Singularity',
+			description: 'Singularity is a Next app and is a digital home for my company called Singularity',
 			thumbnail: 'thumbnails/singularity.png',
-			skills: ['react', 'next', 'sass', 'sanity.io'],
+			skills: ['react', 'next', 'scss', 'sanity.io'],
+			className: 'blue-styled-bg',
 		},
 		{
 			title: 'The BRUG Method',
 			description: '   I built this site from top to bottom using React, Express, and Pay Pal.',
 			thumbnail: 'thumbnails/brug.png',
-			skills: ['react', 'next', 'sass', 'sanity.io'],
+			skills: ['react', 'payment processing', 'API Intigration', 'Communication'],
+			className: 'green-styled-bg',
+		},
+		{
+			title: 'Del Aire BC',
+			description:
+				'Fully built the site for this church from top to bottom using React, Material UI, and Sanity.io.',
+			thumbnail: 'thumbnails/delairebc.png',
+			skills: ['next', 'API Intigration', 'payment processing', 'Hooks'],
+			className: 'blue-styled-bg',
 		},
 		{
 			title: '24/7 Sales',
 			description: 'Browse hundreds of games with huge sales.',
 			thumbnail: 'thumbnails/247.png',
-			skills: ['react', 'next', 'sass', 'sanity.io'],
+			skills: ['react', 'API Intigration', 'email processing'],
+			className: 'orange-styled-bg',
 		},
+		{},
 	];
 
 	return (
-		<div className='project-display-container w-full portfolio-container flex-col'>
-			<h1 className='mt-40 mb-10'>Portfolio</h1>
+		<div className={`project-display-container w-full flex-col ${isMobile ? '' : 'portfolio-container'}`}>
+			<h1 className={`mt-16 ${isMobile ? 'mega-title' : ''}`}>Portfolio</h1>
 			{projectData.map((project: any, i: number) => {
-				return <Project {...project} key={i} />;
+				if (i >= 3 && !extendProjects) {
+					return <></>;
+				}
+				return <Project {...project} i={i} key={i} />;
 			})}
+			<button
+				onClick={() => {
+					setExtendProjects(!extendProjects);
+				}}
+				className='mt-8 w-fit mx-auto'
+			>
+				{extendProjects ? 'Show Less' : 'Show More'}
+			</button>
 		</div>
 	);
 }
@@ -51,39 +138,51 @@ function ProjectDisplay() {
 function Project(project: any) {
 	const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
 	return (
-		<div className='project-container flex mt-8 h-screen'>
-			<section className='flex flex-col w-1/2'>
-				<div className='m-auto p-4 w-full'>
-					<Title />
-					<div
-						className='project-thumbnail-container mt-4'
-						style={{
-							backgroundImage: `url(${project.thumbnail})`,
-						}}
-					>
-						<img src={project.thumbnail} />
-					</div>
-					<button className='mt-4'>Visit</button>
+		<div className={`project-container flex mt-10 ${isMobile ? '' : 'h-screen'} flex-wrap`}>
+			{project.i % 2 === 0 ? <ImageSection /> : isMobile ? <ImageSection /> : <TextSection />}
+			{project.i % 2 === 0 ? <TextSection /> : isMobile ? <TextSection /> : <ImageSection />}
+		</div>
+	);
+
+	function ImageSection() {
+		return (
+			<section className={`flex flex-col ${isMobile ? 'w-full' : 'w-1/2'}`}>
+				<div className={`m-auto w-full ${isMobile ? '' : 'p-4'}`}>
+					{!isMobile ? <Title /> : <></>}
+					<Thumbnail />
+					{!isMobile ? <ActionButton /> : <></>}
 				</div>
 			</section>
-			<section className='flex flex-col w-1/2'>
-				<div className='m-auto p-4 w-full flex flex-col'>
-					<h1>Description</h1>
-					<p className='mt-2'>{project.description}</p>
-					<h1 className='mt-4'>Key Skills</h1>
+		);
+	}
+
+	function TextSection() {
+		return (
+			<section className={`flex flex-col ${isMobile ? 'w-full mt-8' : 'w-1/2'}`}>
+				<div className={`m-auto p-4 w-full flex flex-col ${isMobile ? `${project.className} big-border` : ''}`}>
+					{isMobile ? <Title /> : <></>}
+					{isMobile ? <h2 className={`${isMobile ? 'mt-4' : ''}`}>Description</h2> : <h1>Description</h1>}
+					<p className={`mt-2 project-description`}>{project.description}</p>
+					<h2 className='mt-4'>Key Skills</h2>
 					<div className='flex flex-wrap mx-auto w-fit'>
 						{project.skills.map((skill: string, i: number) => {
+							const commaSpot = i === 0 || i == project.skills?.length - 1 ? '' : ',';
+							console.log();
 							return (
-								<p key={i} className={`mt-2 ${i !== project.skills.length - 1 ? 'mr-2' : ''}`}>
-									{skill}
+								<p
+									key={i}
+									className={`mt-2 ${i !== project.skills.length - 1 ? 'mr-2' : ''} skill-tiem`}
+								>
+									{skill + commaSpot}
 								</p>
 							);
 						})}
 					</div>
+					{isMobile ? <ActionButton /> : <></>}
 				</div>
 			</section>
-		</div>
-	);
+		);
+	}
 
 	function Title({ className, ...rest }: any) {
 		const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
@@ -92,6 +191,19 @@ function Project(project: any) {
 				{project.title}
 			</h1>
 		);
+	}
+
+	function Thumbnail() {
+		const isMobile = useMediaQuery({ query: '(max-width: 680px)' });
+		return (
+			<div className='project-thumbnail-container mt-4' style={{}}>
+				<img src={project.thumbnail} />
+			</div>
+		);
+	}
+
+	function ActionButton() {
+		return <button className='mt-4 w-fit mx-auto'>Visit</button>;
 	}
 }
 
@@ -103,12 +215,6 @@ function LandingScreen() {
 	const [allImagesLoaded, setAllImagesLoaded] = useState(false);
 
 	useEffect(() => {
-		console.log(
-			'normalImageLoaded, dabImageLoaded, catchImageLoaded',
-			normalImageLoaded,
-			dabImageLoaded,
-			catchImageLoaded
-		);
 		if (normalImageLoaded && dabImageLoaded && catchImageLoaded) {
 			setAllImagesLoaded(true);
 		}
