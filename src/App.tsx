@@ -111,7 +111,6 @@ function ProjectDisplay() {
 			skills: ['react', 'API Intigration', 'email processing'],
 			className: 'orange-styled-bg',
 		},
-		{},
 	];
 
 	return (
