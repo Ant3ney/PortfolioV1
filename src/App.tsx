@@ -4,16 +4,31 @@ import { motion } from 'framer-motion';
 import './App.css';
 import './App.scss';
 import { useMediaQuery } from 'react-responsive';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Contact.scss';
 
 function App() {
 	return (
 		<div className='App'>
 			<Header />
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<HomePage />} />
+					<Route path='/contactme' element={<ContactContainer />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
+}
+
+function HomePage() {
+	return (
+		<>
 			<LandingScreen />
 			<ProjectDisplay />
 			<ContactContainer />
-		</div>
+		</>
 	);
 }
 
@@ -88,6 +103,7 @@ function ProjectDisplay() {
 			thumbnail: 'thumbnails/singularity.png',
 			skills: ['react', 'next', 'scss', 'sanity.io'],
 			className: 'blue-styled-bg',
+			link: 'https://www.singularityplanet.com',
 		},
 		{
 			title: 'The BRUG Method',
@@ -95,6 +111,7 @@ function ProjectDisplay() {
 			thumbnail: 'thumbnails/brug.png',
 			skills: ['react', 'payment processing', 'API Intigration', 'Communication'],
 			className: 'green-styled-bg',
+			link: 'https://thebrugmethod.com',
 		},
 		{
 			title: 'Del Aire BC',
@@ -103,6 +120,7 @@ function ProjectDisplay() {
 			thumbnail: 'thumbnails/delairebc.png',
 			skills: ['next', 'API Intigration', 'payment processing', 'Hooks'],
 			className: 'blue-styled-bg',
+			link: 'https://www.delairebc.org',
 		},
 		{
 			title: '24/7 Sales',
@@ -110,6 +128,7 @@ function ProjectDisplay() {
 			thumbnail: 'thumbnails/247.png',
 			skills: ['react', 'API Intigration', 'email processing'],
 			className: 'orange-styled-bg',
+			link: 'https://247-sale.netlify.app',
 		},
 	];
 
@@ -202,7 +221,16 @@ function Project(project: any) {
 	}
 
 	function ActionButton() {
-		return <button className='mt-4 w-fit mx-auto'>Visit</button>;
+		return (
+			<button
+				onClick={() => {
+					window.open(project.link, '_blank');
+				}}
+				className='mt-4 w-fit mx-auto'
+			>
+				Visit
+			</button>
+		);
 	}
 }
 
@@ -312,7 +340,9 @@ function LandingScreen() {
 				<h1 className={`${isMobile ? 'mt-auto' : 'mt-auto'} ml-auto mr-auto mb-0`}>
 					Hello, I’m an Expert Jr. React JS Developer
 				</h1>
-				<button className={`${isMobile ? 'mt-4' : 'mt-2'} mb-auto ml-auto mr-auto`}>Get in Touch</button>
+				<Link to='/contactme' className={`${isMobile ? 'mt-4' : 'mt-2'} mb-auto ml-auto mr-auto`}>
+					<button>Get in Touch</button>
+				</Link>
 			</section>
 		);
 	}
@@ -324,7 +354,7 @@ function Header() {
 			<nav className='flex w-full portfolio-container'>
 				<ul className='mr-auto flex'>
 					<li className='h-full w-auto p-6 pl-0'>
-						<a className='util-text' href='#'>
+						<a className='util-text' href='/'>
 							Home
 						</a>
 					</li>
