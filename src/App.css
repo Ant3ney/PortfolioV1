@@ -54,6 +54,10 @@ label {
 p {
 }
 
+button:hover {
+	cursor: pointer;
+}
+
 .util-text,
 button {
 	font-size: 20px;

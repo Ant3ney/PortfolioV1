@@ -350,16 +350,16 @@ function LandingScreen() {
 
 function Header() {
 	return (
-		<header className='flex flex-row w-screen max-w-full'>
+		<header className='flex flex-row w-screen max-w-full z-40'>
 			<nav className='flex w-full portfolio-container'>
 				<ul className='mr-auto flex'>
 					<li className='h-full w-auto p-6 pl-0'>
-						<a className='util-text' href='/'>
+						<a className='util-text z-40' href='/'>
 							Home
 						</a>
 					</li>
 					<li className='h-full w-auto p-6'>
-						<a className='util-text' href='https://anthony-cavuoti-portfolio.herokuapp.com/download'>
+						<a className='util-text z-40' href='https://anthony-cavuoti-portfolio.herokuapp.com/download'>
 							Resume
 						</a>
 					</li>
