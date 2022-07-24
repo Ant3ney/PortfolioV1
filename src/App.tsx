@@ -359,7 +359,7 @@ function Header() {
 						</a>
 					</li>
 					<li className='h-full w-auto p-6'>
-						<a className='util-text' href='#'>
+						<a className='util-text' href='https://anthony-cavuoti-portfolio.herokuapp.com/download'>
 							Resume
 						</a>
 					</li>
